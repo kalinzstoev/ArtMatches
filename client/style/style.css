@@ -1,0 +1,81 @@
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.center-horizontal {
+    text-align:center;
+}
+
+.post {
+    /* For modern browsers */
+    /* For IE 6/7 (trigger hasLayout) */
+    *zoom: 1;
+    position: relative;
+    opacity: 1; }
+
+.post .post-content {
+    float: left; }
+.post .post-content h3 {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 18px; }
+.post .post-content h3 a {
+    display: inline-block;
+    margin-right: 5px; }
+.post .post-content h3 span {
+    font-weight: normal;
+    font-size: 14px;
+    display: inline-block;
+    color: #aaaaaa; }
+.post .post-content p {
+    margin: 0; }
+.post .discuss {
+    display: block;
+    float: right;
+    margin-top: 7px; }
+
+.comments {
+    list-style-type: none;
+    margin: 0; }
+.comments li h4 {
+    font-size: 16px;
+    margin: 0; }
+.comments li h4 .date {
+    font-size: 12px;
+    font-weight: normal; }
+.comments li h4 a {
+    font-size: 12px; }
+.comments li p:last-child {
+    margin-bottom: 0; }
+
+.voffset  { margin-top: 2px; }
+.voffset1 { margin-top: 5px; }
+.voffset2 { margin-top: 10px; }
+.voffset3 { margin-top: 15px; }
+.voffset4 { margin-top: 30px; }
+.voffset5 { margin-top: 40px; }
+.voffset6 { margin-top: 60px; }
+.voffset7 { margin-top: 80px; }
+.voffset8 { margin-top: 100px; }
+.voffset9 { margin-top: 150px; }
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

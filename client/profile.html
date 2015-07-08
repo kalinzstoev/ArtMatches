@@ -1,0 +1,80 @@
+<template name="profile">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--Column 1-->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <img src="images/derpina.jpg" class="img-responsive col-md-12" alt="Profile_Picture">
+                        </div>
+                        <div class="row">
+                            <h1 class="col-md-12">Username</h1>
+                        </div>
+                    </div>
+                    <ul class="list-group col-md-5">
+                        <li class="list-group-item">Gender</li>
+                        <li class="list-group-item">Age</li>
+                        <li class="list-group-item">Country</li>
+                        <li class="list-group-item">City</li>
+                        <li class="list-group-item">Email</li>
+                        <li class="list-group-item">Number of posts</li>
+                    </ul>
+                </div>
+                <h2>User Description</h2>
+                <p>Bla bla bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla bla blaBla bla bla bla bla bla bla bla bla bla blaBla bla bla bla bla bla bla bla bla bla blaBla bla bla bla bla bla bla bla bla bla bla</p>
+            </div>
+
+            <!--Column 2-->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="btn-group col-md-12">
+                        <button type="button" class="btn btn-default">My Collection</button>
+                        <button type="button" class="btn btn-default">ArtMatches - Received</button>
+                        <button type="button" class="btn btn-default">ArtMatches Sent</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container col-md-12">
+                        <h1>Drag & Drop</h1>
+                    </div>
+                    <form class="form col-md-12">
+                        <div class="input-group col-md-5">
+
+                            <input type="text" class="form-control" placeholder="Enter a title..." name="post-title" id="post-title">
+
+                            <textarea class="form-control" placeholder="Enter a description..." rows="3"></textarea>
+
+                            <button type="button" class="btn btn-default">Add More Authors</button>
+
+                            <input type="text" class="form-control" placeholder="Author Name" name="post-title" id="post-title">
+
+                        </div>
+
+                        <div class="input-group col-md-5">
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Categories <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Manga</a></li>
+                                    <li><a href="#">Art</a></li>
+                                    <li><a href="#">Cars</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <div class="input-group col-md-5">
+                            <button type="button" class="btn btn-default">Upload File</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
