@@ -8,6 +8,7 @@ S3.config = {
 
 Meteor.methods({
     chooseS3Bucket: function(inputBucket) {
+        check(arguments, [Match.Any]);
         S3.config.bucket = inputBucket;
         S3.knox = Knox.createClient(S3.config);
     }
