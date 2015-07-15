@@ -1,12 +1,26 @@
 Template.postSubmit.events({
-    "change .image_input": function(){
-        var files = $("input.image_input")[0].files
+    "change .add_image": function(){
+        var files = $("input.add_image")[0].files
 
         Meteor.call('chooseS3Bucket', 'artmatches');
 
         S3.upload({
             files:files,
             path:'images'
+        },function(e,r){
+            console.log(r);
+        });
+
+    },
+
+    "change .add_audio": function(){
+        var files = $("input.add_audio")[0].files
+
+        Meteor.call('chooseS3Bucket', 'artmatchesaudio');
+
+        S3.upload({
+            files:files,
+            path:''
         },function(e,r){
             console.log(r);
         });
