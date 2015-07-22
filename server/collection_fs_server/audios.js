@@ -1,7 +1,7 @@
 var audioStore = new FS.Store.S3("audios", {
     /* REQUIRED */
-    accessKeyId: "AKIAIGSAKIVWXIVSLSEQ",
-    secretAccessKey: "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",
+    accessKeyId: key,
+    secretAccessKey: key,
     bucket: "artmatches"
 });
 
