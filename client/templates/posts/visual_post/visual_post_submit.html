@@ -1,0 +1,71 @@
+<template name="visualPostSubmit">
+    <form class="main form page">
+        <div class="form-group {{errorClass 'isFileUploaded'}}">
+            <div class="controls">
+            <span class="btn btn-default btn-file">
+            <i class="glyphicon glyphicon-upload "></i> Upload an image<input type="file" class="add_image">
+            </span>
+                <span class="help-block">{{errorMessage 'isFileUploaded'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{errorClass 'title'}}">
+            <label class="control-label voffset2" for="title">Title</label>
+            <div class="controls">
+                <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control"/>
+                <span class="help-block">{{errorMessage 'title'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="description">Description (optional)</label>
+            <div class="controls">
+                <textarea name="description" id="description" rows="5" type="text" value="" placeholder="Your description" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group {{errorClass 'category'}}">
+            <label class="control-label" for="category">Category</label>
+            <div class="controls">
+                <select name="category" id="category" class="form-control">
+                    <option value="" selected disabled>Please select one</option>
+                    <option value="abstract">Abstract</option>
+                    <option value="animals">Animals</option>
+                    <option value="cartoons&comics">Cartoons & Comics</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="game-art">Game Art</option>
+                    <option value="illustration">Illustration</option>
+                    <option value="landscapes&scenery">Landscapes & Scenery</option>
+                    <option value="macabre&horror">Macabre & Horror</option>
+                    <option value="manga&anime">Manga & Anime</option>
+                    <option value="other">Other</option>
+                    <option value="people">People</option>
+                    <option value="political">Political</option>
+                    <option value="popart">Pop Art</option>
+                    <option value="portraits&figures">Portraits & Figures</option>
+                    <option value="psychedelic">Psychedelic</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="space-art">Space Art</option>
+                    <option value="still-life">Still Life</option>
+                    <option value="surreal">Surreal</option>
+                    <option value="technical-drawings">Technical Drawings</option>
+                </select>
+                <span class="help-block">{{errorMessage 'category'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="tags">Tags (optional)</label>
+            <div class="controls">
+                <select name="tags" id="tags" class="form-control block" multiple="multiple"></select>
+            </div>
+        </div>
+
+        <input type="submit" value="Submit" class="btn-lg btn-primary"/>
+    </form>
+</template>
+
+
+
+
+

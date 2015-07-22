@@ -1,0 +1,79 @@
+<template name="writtenPostSubmit">
+    <form class="main form page">
+        <div class="form-group {{errorClass 'title'}}">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+                <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control"/>
+                <span class="help-block">{{errorMessage 'title'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="description">Description (optional)</label>
+            <div class="controls">
+                <textarea name="description" id="description" rows="5" type="text" value="" placeholder="Your description" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group {{errorClass 'type'}}">
+            <label class="control-label" for="type">Type</label>
+            <div class="controls">
+                <select name="type" id="type" class="form-control">
+                    <option value="" selected disabled>Please select one</option>
+                    <option value="novel">Novel</option>
+                    <option value="poem">Poem</option>
+                    <option value="short-story">Short Story</option>
+                </select>
+                <span class="help-block">{{errorMessage 'type'}}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{errorClass 'category'}}">
+            <label class="control-label" for="category">Category</label>
+            <div class="controls">
+                <select name="category" id="category" class="form-control">
+                    <option value="" selected disabled>Please select one</option>
+                    <option value="classic">Classic</option>
+                    <option value="cartoons&comics">Cartoons & Comics</option>
+                    <option value="crime&detective">Crime & Detective</option>
+                    <option value="fable">Fable</option>
+                    <option value="fairy-tale">Fairy tale</option>
+                    <option value="fan-fiction">Fan Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="folklore">Folklore</option>
+                    <option value="historical">Historical</option>
+                    <option value="horror">Horror</option>
+                    <option value="humour">Humour</option>
+                    <option value="legend">Legend</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="myth">Myth</option>
+                    <option value="other">Other</option>
+                    <option value="sci-fi">Sci-fi</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="western">Western</option>
+                </select>
+                <span class="help-block">{{errorMessage 'category'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="tags">Tags (optional)</label>
+            <div class="controls">
+                <select name="tags" id="tags" class="form-control block" multiple="multiple"></select>
+            </div>
+        </div>
+
+        <div class="form-group {{errorClass 'text'}}">
+            <label class="control-label" for="formatted-text">Formatted text</label>
+            <div class="controls">
+                <div id="summernote"></div>
+                <span class="help-block">{{errorMessage 'text'}}</span>
+            </div>
+        </div>
+
+        <input type="submit" value="Submit" class="btn-lg btn-primary"/>
+    </form>
+</template>
+
+

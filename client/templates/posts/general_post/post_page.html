@@ -1,0 +1,23 @@
+<template name="postPage">
+    <div class="post-page page">
+        <h1>{{title}}</h1>
+        <h2>{{description}}</h2>
+        {{#each images}}
+            <div class="col-md-12">
+                <!--TODO add indivudual link to each image-->
+                <img src="{{url}}" alt="Post Image" class="img-responsive voffset2" />
+            </div>
+        {{/each}}
+
+        {{#each audios}}
+            <audio controls>
+                <source src="{{url}}" type="audio/ogg">
+                <source src="{{url}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {{/each}}
+
+        {{{text}}}
+
+    </div>
+</template>

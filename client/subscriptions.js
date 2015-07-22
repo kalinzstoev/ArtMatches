@@ -1,1 +1,2 @@
-Meteor.subscribe('texts');
+Meteor.subscribe('images');
+Meteor.subscribe('audios');

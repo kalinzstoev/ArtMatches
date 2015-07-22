@@ -79,3 +79,19 @@
     cursor: inherit;
     display: block;
 }
+
+/**
+ * Extra large button extensions. Extends `.btn`.
+ */
+.btn-xxlarge {
+    padding: 18px 28px;
+    font-size: 48px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.bootstrap-tagsinput {
+    width: 100%;
+}
