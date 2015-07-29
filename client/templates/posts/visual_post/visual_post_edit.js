@@ -1,17 +1,28 @@
 //Template reactive array variable
 var filesIdArray = new ReactiveArray();
 
-Template.visualPostSubmit.onCreated(function() {
-    Session.set('visualPostSubmitErrors', {});
+Template.visualPostEdit.onCreated(function() {
+    Session.set('visualPostEditErrors', {});
+    filesIdArray.clear();
+    //Add ids of the post instance to the filesIdArray of the template instance
+    this.data.filesIdArray.forEach(function(element) {
+        filesIdArray.push(element);
+    });
 });
 
-Template.visualPostSubmit.helpers({
+Template.visualPostEdit.helpers({
     errorMessage: function(field) {
-        return Session.get('visualPostSubmitErrors')[field];
+        return Session.get('visualPostEditErrors')[field];
     },
     errorClass: function (field) {
-        return !!Session.get('visualPostSubmitErrors')[field] ? 'has-error' : '';
+        return !!Session.get('visualPostEditErrors')[field] ? 'has-error' : '';
     },
+
+    tags: function(){
+        var tags = this.tags;
+        return tags;;
+    },
+
     images: function() {
         if (filesIdArray.list().length > 0){
             return Images.find({
@@ -19,39 +30,61 @@ Template.visualPostSubmit.helpers({
             })
         }
     },
-
     isFileUploading: function() {
         return Session.get('isFileUploading');
     }
 });
 
-Template.visualPostSubmit.events({
+Template.visualPostEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
-        var post = {
-            postType: 'visual',
+        var currentPostId = this._id
+
+        var postProperties = {
             title: $(e.target).find('[name=title]').val(),
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
             filesIdArray: filesIdArray.slice(),
             isFilePresent: filesIdArray.length > 0
-        };
+        }
 
-        var errors = validateFilePost(post);
-        if (errors.title || errors.category || errors.filesIdArray)
-            return Session.set('visualPostSubmitErrors', errors);
+        var errors = validateFilePost(postProperties);
+        if (errors.title || errors.category ||errors.isFilePresent)
+            return Session.set('visualPostEditErrors', errors);
 
-        Meteor.call('postFileInsert', post, function(error, result) {
-            // display the error to the user and abort
+        Posts.update(currentPostId, {$set: postProperties}, function(error) {
             if (error) {
-                return throwError(error.reason);
-            }else {
+                // display the error to the user
+                throwError(error.reason);
+            } else {
                 filesIdArray.clear();
-                Router.go('postPage', {_id: result._id});
+                toastr.success("Post was updated successfully")
+                Router.go('postPage', {_id: currentPostId});
             }
         });
+    },
+
+    'click .delete': function(e) {
+        e.preventDefault();
+
+        if (confirm("Delete this post?")) {
+            var currentPostId = this._id;
+
+            filesIdArray.forEach(function(element){
+                Images.remove(element),function (error) {
+                    if (error) {
+                        toastr.error("Delete failed" + error);
+                    }
+                }
+            });
+
+            filesIdArray.clear();
+            Posts.remove(currentPostId);
+            toastr.success("Post deleted!");
+            Router.go('postsList');
+        }
     },
 
     "change .add_image": function(e){
@@ -104,12 +137,13 @@ Template.visualPostSubmit.events({
             })
         }
     }
+
+
 });
 
-Template.visualPostSubmit.rendered = function(){
+Template.visualPostEdit.rendered = function(){
     $('#tags').tagsinput();
-}
-
-
+    $('#category').val(this.data.category);
+};
 
 

@@ -1,13 +1,27 @@
 <template name="postItem">
     <a href="{{pathFor 'postPage'}}"><h5><b>Title:</b> {{title}}</h5></a>
-    <h5>Description: {{description}}</h5>
     <h5>Author: {{author}}</h5>
-    {{#each images}}
-        <div class="row">
-            <div class="col-md-12">
-                    <!--TODO Change to thumbnail collection and create link from image-->
-                    <img src="{{url}}" alt="Post Thumbnail" class="thumbnail" />
-            </div>
-        </div>
-    {{/each}}
+    <h5>{{commentsCount}} comments</h5>
+
+    {{#if isVisual}}
+        <img src="images/visualICO.png" alt="Post Thumbnail" class="thumbnail" />
+    {{/if}}
+
+    {{#if isAudio}}
+        <img src="images/audioICO.png" alt="Post Thumbnail" class="thumbnail" />
+    {{/if}}
+
+    {{#if isWritten}}
+        <img src="images/writtenICO.png" alt="Post Thumbnail" class="thumbnail" />
+    {{/if}}
+
+        <!--{{#each images}}-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+    <!--&lt;!&ndash;TODO Change to thumbnail collection and create link from image&ndash;&gt;-->
+    <!--<img src="{{url}}" alt="Post Thumbnail" class="thumbnail" />-->
+    <!--</div>-->
+    <!--</div>-->
+        <!--{{/each}}-->
+
 </template>

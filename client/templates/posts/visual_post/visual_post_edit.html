@@ -1,29 +1,29 @@
-<template name="visualPostSubmit">
-    <form class="main form page">
+<template name="visualPostEdit">
 
-        {{#if isFileUploading}}
-            <h2>Uploading...</h2>
-        {{/if}}
-        {{#each images}}
-            <a class="delete-image">
-                <i class="fa fa-trash fa-2x"></i>
-            </a>
-            <img src="{{url}}" alt="Image thumbnail" class="thumbnail" />
-        {{/each}}
+    {{#if isFileUploading}}
+        <h2>Uploading...</h2>
+    {{/if}}
+    {{#each images}}
+        <a class="delete-image">
+            <i class="fa fa-trash fa-2x"></i>
+        </a>
+        <img src="{{url}}" alt="Image thumbnail" class="thumbnail" />
+    {{/each}}
 
-        <div class="form-group {{errorClass 'isFilePresent'}}">
-            <div class="controls">
+    <div class="form-group {{errorClass 'isFilePresent'}}">
+        <div class="controls">
             <span class="btn btn-default btn-file">
             <i class="glyphicon glyphicon-upload "></i> Upload an image<input type="file" class="add_image">
             </span>
-                <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
-            </div>
+            <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
         </div>
+    </div>
 
+    <form class="main form page">
         <div class="form-group {{errorClass 'title'}}">
-            <label class="control-label voffset2" for="title">Title</label>
+            <label class="control-label" for="title">Title</label>
             <div class="controls">
-                <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control"/>
+                <input name="title" id="title" type="text" value="{{title}}" placeholder="Name your post" class="form-control"/>
                 <span class="help-block">{{errorMessage 'title'}}</span>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="form-group">
             <label class="control-label" for="description">Description (optional)</label>
             <div class="controls">
-                <textarea name="description" id="description" rows="5" type="text" value="" placeholder="Your description" class="form-control"></textarea>
+                <textarea name="description" id="description" rows="5" type="text" value="{{description}}" placeholder="Your description" class="form-control"></textarea>
             </div>
         </div>
 
@@ -39,7 +39,6 @@
             <label class="control-label" for="category">Category</label>
             <div class="controls">
                 <select name="category" id="category" class="form-control">
-                    <option value="" selected disabled>Please select one</option>
                     <option value="abstract">Abstract</option>
                     <option value="animals">Animals</option>
                     <option value="cartoons&comics">Cartoons & Comics</option>
@@ -68,15 +67,17 @@
         <div class="form-group">
             <label class="control-label" for="tags">Tags (optional)</label>
             <div class="controls">
-                <select name="tags" id="tags" class="form-control block" multiple="multiple"></select>
+                <select name="tags" id="tags" class="form-control block" multiple="multiple">
+                    {{#each tags}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
             </div>
         </div>
 
         <input type="submit" value="Submit" class="btn-lg btn-primary"/>
+        <a class="btn btn-danger delete" href="#">Delete post</a>
     </form>
 </template>
-
-
-
 
 

@@ -16,6 +16,7 @@ Template.writtenPostSubmit.events({
         e.preventDefault();
 
         var post = {
+            postType: 'written',
             title: $(e.target).find('[name=title]').val(),
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
@@ -30,6 +31,7 @@ Template.writtenPostSubmit.events({
 
         Meteor.call('postTextInsert', post, function(error, result) {
             // display the error to the user and abort
+            console.log(error);
             if (error)
                 return throwError(error.reason);
 

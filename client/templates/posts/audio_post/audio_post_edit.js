@@ -1,16 +1,26 @@
 //Template reactive array variable
 var filesIdArray = new ReactiveArray();
 
-Template.audioPostSubmit.onCreated(function() {
-    Session.set('audioPostSubmitErrors', {});
+Template.audioPostEdit.onCreated(function() {
+    Session.set('audioPostEditErrors', {});
+    filesIdArray.clear();
+    //Add ids of the post instance to the filesIdArray of the template instance
+    this.data.filesIdArray.forEach(function(element) {
+        filesIdArray.push(element);
+    });
 });
 
-Template.audioPostSubmit.helpers({
+Template.audioPostEdit.helpers({
     errorMessage: function(field) {
-        return Session.get('audioPostSubmitErrors')[field];
+        return Session.get('audioPostEditErrors')[field];
     },
     errorClass: function (field) {
-        return !!Session.get('audioPostSubmitErrors')[field] ? 'has-error' : '';
+        return !!Session.get('audioPostEditErrors')[field] ? 'has-error' : '';
+    },
+
+    tags: function(){
+        var tags = this.tags;
+        return tags;;
     },
     audios: function() {
         if (filesIdArray.list().length > 0){
@@ -24,33 +34,56 @@ Template.audioPostSubmit.helpers({
     }
 });
 
-Template.audioPostSubmit.events({
+Template.audioPostEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
-        var post = {
-            postType: 'audio',
+        var currentPostId = this._id
+
+        var postProperties = {
             title: $(e.target).find('[name=title]').val(),
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
             filesIdArray: filesIdArray.slice(),
             isFilePresent: filesIdArray.length > 0
-        };
+        }
 
-        var errors = validateFilePost(post);
-        if (errors.title || errors.category || errors.filesIdArray)
-            return Session.set('audioPostSubmitErrors', errors);
+        var errors = validateFilePost(postProperties);
+        if (errors.title || errors.category|| errors.isFilePresent)
+            return Session.set('audioPostEditErrors', errors);
 
-        Meteor.call('postFileInsert', post, function(error, result) {
-            // display the error to the user and abort
+        Posts.update(currentPostId, {$set: postProperties}, function(error) {
             if (error) {
-                return throwError(error.reason);
-            }else {
+                // display the error to the user
+                throwError(error.reason);
+            } else {
                 filesIdArray.clear();
-                Router.go('postPage', {_id: result._id});
+                toastr.success("Post was updated successfully")
+                Router.go('postPage', {_id: currentPostId});
             }
         });
+    },
+
+    'click .delete': function(e) {
+        e.preventDefault();
+
+        if (confirm("Delete this post?")) {
+            var currentPostId = this._id;
+
+            filesIdArray.forEach(function(element){
+                Audios.remove(element),function (error) {
+                    if (error) {
+                        toastr.error("Delete failed" + error);
+                    }
+                }
+            });
+
+            filesIdArray.clear();
+            Posts.remove(currentPostId);
+            toastr.success("Post deleted!");
+            Router.go('postsList');
+        }
     },
 
     "change .add_audio": function(e){
@@ -74,7 +107,7 @@ Template.audioPostSubmit.events({
                     var intervalHandle = Meteor.setInterval(function () {
 
                         if (result.hasStored('audios')) {
-                        // File has been uploaded and stored. Can safely display it on the page.
+                            // File has been uploaded and stored. Can safely display it on the page.
                             toastr.success('File upload succeeded!');
                             filesIdArray.push(result._id);
                             Session.set('isFileUploading', false);
@@ -105,10 +138,7 @@ Template.audioPostSubmit.events({
     }
 });
 
-Template.audioPostSubmit.rendered = function(){
+Template.audioPostEdit.rendered = function(){
     $('#tags').tagsinput();
-}
-
-
-
-
+    $('#category').val(this.data.category);
+};

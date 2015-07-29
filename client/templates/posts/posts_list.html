@@ -43,9 +43,16 @@
         </div>
     </div>
 
-    <div class="row">
-        <button type="button" class="btn btn-primary center-block ">Load more...</button>
-    </div>
+    {{#if nextPath}}
+        <div class="span7 text-center">
+            <a class="btn-lg btn-primary" href="{{nextPath}}">Load more...</a>
+            <p class="voffset2"></p>
+        </div>
+    {{else}}
+        {{#unless ready}}
+            {{> spinner}}
+        {{/unless}}
+    {{/if}}
 </template>
 
 
