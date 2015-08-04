@@ -1,0 +1,31 @@
+<template name="userPosts">
+
+    <h1>User posts</h1>
+
+    <div class="posts">
+        <div class="container-fluid">
+            <div class="row">
+                {{#each posts}}
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        {{> postItem}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    {{#if isEmpty}}
+        <h1 class="text-center voffset5">No posts available</h1>
+    {{/if }}
+
+        {{#if Template.subscriptionsReady}}
+            {{#if hasMorePosts}}
+                <div class="span7 voffset2 text-center">
+                    <a id="load-more" class="btn btn-primary" href="#">Load more...</a>
+                    <p class="voffset2"></p>
+                </div>
+            {{/if}}
+        {{else}}
+            <div class="loading">{{>spinner}}</div>
+        {{/if}}
+</template>

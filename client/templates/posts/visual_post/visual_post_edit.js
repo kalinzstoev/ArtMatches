@@ -83,7 +83,7 @@ Template.visualPostEdit.events({
             filesIdArray.clear();
             Posts.remove(currentPostId);
             toastr.success("Post deleted!");
-            Router.go('postsList');
+            Router.go('home');
         }
     },
 

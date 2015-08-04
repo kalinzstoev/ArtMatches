@@ -53,7 +53,7 @@ Template.writtenPostEdit.events({
             var currentPostId = this._id;
             Posts.remove(currentPostId);
             toastr.success("Post deleted!");
-            Router.go('postsList');
+            Router.go('home');
         }
     }
 

@@ -1,9 +1,10 @@
-Meteor.publish('posts', function(options) {
+Meteor.publish('posts', function (input,options) {
     check(options, {
         sort: Object,
         limit: Number
     });
-    return Posts.find({}, options);
+    check(input, Object);
+    return Posts.find(input, options);
 });
 
 Meteor.publish('singlePost', function(id) {

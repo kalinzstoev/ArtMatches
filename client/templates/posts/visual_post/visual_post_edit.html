@@ -1,25 +1,25 @@
 <template name="visualPostEdit">
+    <form class="main form page">
 
-    {{#if isFileUploading}}
-        <h2>Uploading...</h2>
-    {{/if}}
-    {{#each images}}
-        <a class="delete-image">
-            <i class="fa fa-trash fa-2x"></i>
-        </a>
-        <img src="{{url}}" alt="Image thumbnail" class="thumbnail" />
-    {{/each}}
+        {{#if isFileUploading}}
+            <h2>Uploading...</h2>
+        {{/if}}
+        {{#each images}}
+            <a class="delete-image">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
+            <img src="{{url}}" alt="Image thumbnail" class="thumbnail" />
+        {{/each}}
 
-    <div class="form-group {{errorClass 'isFilePresent'}}">
-        <div class="controls">
+        <div class="form-group {{errorClass 'isFilePresent'}}">
+            <div class="controls">
             <span class="btn btn-default btn-file">
             <i class="glyphicon glyphicon-upload "></i> Upload an image<input type="file" class="add_image">
             </span>
-            <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
+                <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
+            </div>
         </div>
-    </div>
 
-    <form class="main form page">
         <div class="form-group {{errorClass 'title'}}">
             <label class="control-label" for="title">Title</label>
             <div class="controls">

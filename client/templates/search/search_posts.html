@@ -1,0 +1,32 @@
+<template name="searchPosts">
+   <h3>Enter search term here: {{> esInput index="posts" placeholder=""}}</h3>
+
+    <div class="posts voffset2">
+        <div class="container-fluid">
+            <div class="row">
+                {{#esEach index="posts"}}
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        {{> postItem}}
+                    </div>
+                {{/esEach}}
+            </div>
+        </div>
+    </div>
+
+    <div class="span7 text-center">
+    {{> esLoadMoreButton index="posts" class="btn btn-primary"}}
+    </div>
+
+    {{#ifEsHasNoResults index="posts"}}
+        <div class="no-results">No results found!</div>
+    {{/ifEsHasNoResults}}
+
+    {{#ifEsIsSearching index="posts"}}
+
+        <div class="container-fluid voffset10">
+            <div>{{>spinner}}</div>
+        </div>
+
+
+    {{/ifEsIsSearching}}
+</template>
