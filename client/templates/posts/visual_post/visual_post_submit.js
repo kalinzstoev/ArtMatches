@@ -61,6 +61,7 @@ Template.visualPostSubmit.events({
 
         FS.Utility.eachFile(e, function(file) {
             var newFile = new FS.File(file);
+            console.log(user.username);
             newFile.username = user.username;
             newFile.userId = user._id;
             newFile.userSlug = Slug.slugify(user.username);

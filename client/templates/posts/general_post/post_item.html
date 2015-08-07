@@ -1,5 +1,8 @@
 <template name="postItem">
-    <a href="{{pathFor 'postPage'}}"><h5><b>Title:</b> {{title}}</h5></a>
+
+    <div class="panel panel-default">
+    	<div class="panel-body">
+    <a id='post-page-link' href="{{pathFor 'postPage'}}"><h5><b>Title:</b> {{title}}</h5></a>
     <h5>Author: {{author}}</h5>
     <h5>{{pluralize commentsCount "comment"}}</h5>
     <h5> {{pluralize votes "vote"}}</h5>
@@ -28,5 +31,6 @@
     <!--</div>-->
     <!--</div>-->
         <!--{{/each}}-->
-
+        </div>
+    </div>
 </template>

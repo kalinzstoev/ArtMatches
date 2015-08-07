@@ -6,30 +6,6 @@ Template.postItem.helpers({
     //        )
     //    }
     //},
-
-    isVisual: function() {
-        if (this.postType == 'visual') {
-            return true;
-        } else {
-            return false;
-        }
-    },
-
-    isAudio: function() {
-        if (this.postType == 'audio') {
-            return true;
-        } else {
-            return false;
-        }
-    },
-
-    isWritten: function() {
-        if (this.postType == 'written') {
-            return true;
-        } else {
-            return false;
-        }
-    }
 });
 
 

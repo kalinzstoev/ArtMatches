@@ -11,26 +11,24 @@ Template.postPage.helpers({
         })
     },
 
+    tags: function(){
+        var tags = this.tags;
+        tags.forEach(function(part, index) {
+            tags[index] = " #" + tags[index];
+        });
+
+        return tags;
+    },
+
     ownPost: function() {
         return this.userId == Meteor.userId();
-    },
-
-    isVisual: function() {
-        return this.postType == 'visual';
-    },
-
-    isAudio: function() {
-        return this.postType == 'audio';
-    },
-
-    isWritten: function() {
-        return this.postType == 'written';
     },
 
     comments: function() {
         return Comments.find({postId: this._id});
     },
 
+    //TODO handle a dislike/liked functionality
     upvotedClass: function() {
         var userId = Meteor.userId();
         if (userId && !_.include(this.upvoters, userId)) {
@@ -47,5 +45,9 @@ Template.postPage.events({
         Meteor.call('upvote', this._id);
     }
 });
+
+Template.postPage.rendered = function() {
+    $('#tags').tagsinput();
+};
 
 

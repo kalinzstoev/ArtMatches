@@ -1,4 +1,4 @@
-Template.userPosts.events({
+Template.submitArtMatch.events({
     'click #load-more': function (event, instance) {
         event.preventDefault();
 
@@ -12,7 +12,7 @@ Template.userPosts.events({
     }
 });
 
-Template.userPosts.helpers({
+Template.submitArtMatch.helpers({
     // the posts cursor
     posts: function () {
         return Template.instance().posts();
@@ -29,12 +29,14 @@ Template.userPosts.helpers({
 });
 
 
-Template.userPosts.onCreated(function () {
+Template.submitArtMatch.onCreated(function () {
 
     // 1. Initialization
 
     var instance = this;
     var userId = Meteor.userId();
+
+    console.log ("This is " + instance);
 
     // initialize the reactive variables
     instance.loaded = new ReactiveVar(0);
@@ -62,7 +64,7 @@ Template.userPosts.onCreated(function () {
     // 3. Cursor
 
     instance.posts = function() {
-        return Posts.find({}, {limit: instance.loaded.get()});
+        return Posts.find({userId: userId}, {limit: instance.loaded.get()});
     }
 
 });

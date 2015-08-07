@@ -1,0 +1,41 @@
+<template name="submitArtMatch">
+
+    <div class="modal fade" id="submit-artmatch" tabindex="-1" role="dialog" aria-labelledby="submit-artmatch" aria-hidden="true">
+        <div class="modal-dialog large-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Submit an ArtMatch</h4>
+                </div>
+                <h3>Choose one of your own posts content to submit: </h3>
+
+                <div class="posts">
+                    <div class="container-fluid">
+                        <div class="row">
+                            {{#each posts}}
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    {{> submitArtMatchItem}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+
+                {{#if isEmpty}}
+                    <h1 class="text-center voffset5">No posts available</h1>
+                {{/if }}
+
+                {{#if Template.subscriptionsReady}}
+                    {{#if hasMorePosts}}
+                        <div class="span7 voffset2 text-center">
+                            <a id="load-more" class="btn btn-primary" href="#">Load more...</a>
+                            <p class="voffset2"></p>
+                        </div>
+                    {{/if}}
+                {{else}}
+                    <div class="loading">{{>spinner}}</div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,9 +1,17 @@
 <template name="commentItem">
     <li>
-        <h4>
-            <span class="author">{{author}}</span>
-            <span class="date">on {{submitted}}</span>
-        </h4>
-        <p>{{body}}</p>
+        <div class="panel panel-default">
+        	  <div class="panel-heading">
+        			<h3 class="panel-title">{{author}} on {{submitted}}</h3>
+        	  </div>
+        	  <div class="panel-body">
+        			{{body}}
+        	  </div>
+        </div>
+        <!--<h4>-->
+            <!--<span class="author">{{author}}</span>-->
+            <!--<span class="date">on </span>-->
+        <!--</h4>-->
+        <!--<p>{{body}}</p>-->
     </li>
 </template>

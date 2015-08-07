@@ -31,6 +31,8 @@ Template.audioPostSubmit.events({
         var post = {
             postType: 'audio',
             title: $(e.target).find('[name=title]').val(),
+            //TODO check if a file or an embeded file was submitted
+            soundcloud: $(e.target).find('[name=soundcloud]').val(),
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
