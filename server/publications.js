@@ -12,6 +12,11 @@ Meteor.publish('singlePost', function(id) {
     return Posts.find(id);
 });
 
+Meteor.publish('artmatches', function(){
+    return Artmatches.find();
+});
+
+
 Meteor.publish('images', function(){
     return Images.find();
 });

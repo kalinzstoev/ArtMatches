@@ -1,29 +1,13 @@
 <template name="submitArtMatchItem">
+
     <div class="panel panel-default">
-        <div class="panel-body">
-            <h5><b>Title:</b> {{title}}</h5>
-            {{#if isVisual}}
-                <h3>Visual</h3>
-                {{#each images}}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!--TODO Change to thumbnail collection and create link from image-->
-                            <img src="{{url}}" alt="Post Thumbnail" class="thumbnail" />
-                        </div>
-                    </div>
-                {{/each}}
-            {{/if}}
-
-            {{#if isAudio}}
-                <h3>Audio</h3>
-                <!--<img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/audioICO.png" alt="Post Thumbnail" class="thumbnail" />-->
-            {{/if}}
-
-            {{#if isWritten}}
-                <h3>Written</h3>
-                <!--<img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/writtenICO.png" alt="Post Thumbnail" class="thumbnail" />-->
-            {{/if}}
-
+        <div class="panel-heading">
+            <h3 class="panel-title text-left">
+                    {{title}}
+                <div class="pull-right loffset1">
+                    <input type="radio" autocomplete="off" name="radioOptions" id="radio1" value="{{_id}}">
+                </div>
+            </h3>
         </div>
     </div>
 </template>

@@ -1,0 +1,66 @@
+<template name="artmatchPage">
+
+    <div class="post-page page">
+        <div class="panel panel-default zero-margin-bottom">
+            <div class="panel-body">
+                <div class="row">
+                    <h1 class="loffset15px">{{originalTitle}}</h1>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{#each images}}
+                            <div class="col-md-12">
+                                <!--TODO add indivudual link to each image-->
+                                <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{#with visual}}
+                            <div class="col-md-12">
+                                <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                            </div>
+                        {{/with}}
+                    </div>
+                </div>
+
+                {{#each posts}}
+                    {{title}}
+                {{/each}}
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Details</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Submitted: {{submitted}}</p>
+                        <p>Tags: {{tags}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="panel panel-default">-->
+        <!--<div class="panel-body">-->
+        <!--<button type="button" class="btn btn-xs {{likedClass}}"><i class="fa fa-thumbs-o-up"> Like</i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<ul class="comments">-->
+            <!--{{#each comments}}-->
+        <!--{{> commentItem}}-->
+            <!--{{/each}}-->
+        <!--</ul>-->
+
+            <!--{{#if currentUser}}-->
+        <!--{{> commentSubmit}}-->
+            <!--{{else}}-->
+        <!--<p>Please log in to leave a comment.</p>-->
+            <!--{{/if}}-->
+    </div>
+
+</template>

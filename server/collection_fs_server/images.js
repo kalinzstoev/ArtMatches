@@ -2,15 +2,33 @@ var imageStore = new FS.Store.S3("images", {
     /* REQUIRED */
     accessKeyId: "AKIAILLXBNDCK75Q47DQ",
     secretAccessKey: "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",
-    bucket: "artmatches"
+    bucket: "artmatches",
+    region: "eu-west-1"
 });
 
+
+var thumbsStore = new FS.Store.S3("thumbs", {
+    /* REQUIRED */
+    accessKeyId: "AKIAILLXBNDCK75Q47DQ",
+    secretAccessKey: "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",
+    bucket: "artmatches.thumbs",
+    region:"eu-west-1",
+    beforeWrite: function(fileObj) {
+        fileObj.size(100, {store: "thumbStore", save: false});
+    },
+    transformWrite: function(fileObj, readStream, writeStream) {
+        var size = '200';
+        gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
+        //gm(readStream, fileObj.name()).resize('100', '100').stream().pipe(writeStream)
+    }
+});
+
+
 Images = new FS.Collection("Images", {
-    stores: [imageStore],
+    stores: [imageStore, thumbsStore],
     filter: {
         allow: {
             contentTypes: ['image/*']
-            //TODO check if you have further define any filters for the image extensions
         }
     }
 });

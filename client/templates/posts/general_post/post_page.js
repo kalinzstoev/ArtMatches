@@ -29,10 +29,10 @@ Template.postPage.helpers({
     },
 
     //TODO handle a dislike/liked functionality
-    upvotedClass: function() {
+    likedClass: function() {
         var userId = Meteor.userId();
-        if (userId && !_.include(this.upvoters, userId)) {
-            return 'btn-primary upvotable';
+        if (userId && !_.include(this.likers, userId)) {
+            return 'btn-primary likeable';
         } else {
             return 'disabled';
         }
@@ -40,9 +40,9 @@ Template.postPage.helpers({
 });
 
 Template.postPage.events({
-    'click .upvotable': function(e) {
+    'click .likeable': function(e) {
         e.preventDefault();
-        Meteor.call('upvote', this._id);
+        Meteor.call('like', this._id);
     }
 });
 

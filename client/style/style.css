@@ -85,8 +85,6 @@
 .voffset9 { margin-top: 150px; }
 .voffset10 { margin-top: 200px; }
 
-
-
 .loffset1 {
     margin-left: 14px;
 }
@@ -165,3 +163,18 @@
     width: 100%;
 }
 
+.panel-title, .title-postItem {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: inherit;
+}
+
+.display-inline {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.iframe-custom-size iframe{
+    height: 100px !important;
+}

@@ -1,40 +1,94 @@
 <template name="submitArtMatch">
 
-    <div class="modal fade" id="submit-artmatch" tabindex="-1" role="dialog" aria-labelledby="submit-artmatch" aria-hidden="true">
-        <div class="modal-dialog large-modal">
+    <div class="modal fade " id="submit-artmatch" tabindex="-1" role="dialog" aria-labelledby="submit-artmatch" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Submit an ArtMatch</h4>
                 </div>
-                <h3>Choose one of your own posts content to submit: </h3>
+                <div class="modal-body">
+                    <h5>Choose one of your own posts content to submit: </h5>
 
-                <div class="posts">
-                    <div class="container-fluid">
-                        <div class="row">
-                            {{#each posts}}
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    {{> submitArtMatchItem}}
+                    <ul id="post-type-tabs" class="nav nav-tabs nav-justified">
+                        <li role="presentation" class="active"><a data-toggle="tab" href="#visual-tab"><i class="fa fa-picture-o"></i> Visual</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="#audio-tab"><i class="fa fa-headphones"></i> Audio</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="#written-tab"><i class="fa fa-pencil"></i> Written</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="visual-tab" class="tab-pane fade in active">
+                            <div class="container-fluid voffset4">
+                                <div class="row">
+                                    <div id="images-button-group" class="btn-group" data-toggle="buttons">
+                                        {{#if isPostTabVisual}}
+                                            {{#each posts}}
+                                                {{#each images}}
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                        <div class="radio">
+                                                            <img src="{{url store="thumbs"}}" alt="Post Thumbnail" class="display-inline" />
+                                                            <input type="radio" autocomplete="off" name="radioOptions" id="radio1"
+                                                                   value="{{#with ..}}{{_id}}{{/with}}/{{_id}}">
+                                                        </div>
+                                                    </div>
+                                                {{/each}}
+                                            {{/each }}
+                                        {{/if}}
+                                    </div>
                                 </div>
-                            {{/each}}
+                            </div>
                         </div>
+
+                        <div id="audio-tab" class="tab-pane fade">
+                            <div class="container-fluid voffset4 text-center">
+                                <div id="audio-button-group" class="btn-group" data-toggle="buttons">
+                                    {{#each posts}}
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            {{> submitArtMatchItem}}
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="written-tab" class="tab-pane fade">
+                            <div class="container-fluid voffset4 text-center">
+                                <div id="written-button-group" class="btn-group" data-toggle="buttons">
+                                    {{#each posts}}
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            {{> submitArtMatchItem}}
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        {{#if Template.subscriptionsReady}}
+                            {{#if hasMoreItems}}
+                                <div class="span7 voffset2 text-center">
+                                    <a id="load-more" class="btn btn-primary" href="#">Load more...</a>
+                                    <p class="voffset2"></p>
+                                </div>
+                            {{/if}}
+
+                            {{#if isEmpty}}
+                                <h1 class="text-center voffset5">No posts available</h1>
+                            {{/if }}
+                        {{else}}
+                            <div class="loading">{{>spinner}}</div>
+                        {{/if}}
+
+
                     </div>
                 </div>
-
-                {{#if isEmpty}}
-                    <h1 class="text-center voffset5">No posts available</h1>
-                {{/if }}
-
-                {{#if Template.subscriptionsReady}}
-                    {{#if hasMorePosts}}
-                        <div class="span7 voffset2 text-center">
-                            <a id="load-more" class="btn btn-primary" href="#">Load more...</a>
-                            <p class="voffset2"></p>
-                        </div>
-                    {{/if}}
-                {{else}}
-                    <div class="loading">{{>spinner}}</div>
-                {{/if}}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="submit-content" type="button" class="btn btn-success">Submit</button>
+                </div>
             </div>
         </div>
     </div>

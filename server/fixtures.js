@@ -20,8 +20,8 @@
 //            userId: sacha._id,
 //            submitted: new Date(now - i * 3600 * 1000 + 1),
 //            commentsCount: 0,
-//            upvoters: [],
-//            votes: 0
+//            likers: [],
+//            likes: 0
 //        });
 //    }
 //}

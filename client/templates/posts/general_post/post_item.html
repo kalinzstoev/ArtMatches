@@ -1,36 +1,49 @@
 <template name="postItem">
 
     <div class="panel panel-default">
-    	<div class="panel-body">
-    <a id='post-page-link' href="{{pathFor 'postPage'}}"><h5><b>Title:</b> {{title}}</h5></a>
-    <h5>Author: {{author}}</h5>
-    <h5>{{pluralize commentsCount "comment"}}</h5>
-    <h5> {{pluralize votes "vote"}}</h5>
+        <div class="panel-heading">
+            <h6 class="title-postItem">
+                {{#if isVisual}}
+                    <i class="fa fa-picture-o"></i>
+                {{/if}}
+                {{#if isAudio}}
+                    <i class="fa fa-headphones"></i>
+                {{/if}}
+                {{#if isWritten}}
+                    <i class="fa fa-pencil"></i>
+                {{/if}}
+                <b>{{title}}</b>
+            </h6>
+        </div>
 
-    {{#if isVisual}}
+        <div class="panel-body">
+            {{#if isVisual}}
+                {{#each images}}
+                    <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
+                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                    </a>
+                {{/each}}
+            {{/if}}
 
-        <h3>Visual</h3>
-        <!--<img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/visualICO.png" alt="Post Thumbnail" class="thumbnail" />-->
-    {{/if}}
+            {{#if isAudio}}
+                <a href="{{pathFor 'postPage'}}">
+                    <img src="http://www.ck-bb.co.uk/wp-content/uploads/2014/06/Placeholder-200x200.jpg" alt="Post Thumbnail" class="thumbnail center-block"/>
+                </a>
+            {{/if}}
 
-    {{#if isAudio}}
-        <h3>Audio</h3>
-        <!--<img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/audioICO.png" alt="Post Thumbnail" class="thumbnail" />-->
-    {{/if}}
+            {{#if isWritten}}
+                <a href="{{pathFor 'postPage'}}">
+                    <img src="http://www.ck-bb.co.uk/wp-content/uploads/2014/06/Placeholder-200x200.jpg" alt="Post Thumbnail" class="thumbnail center-block"/>
+                </a>
+            {{/if}}
 
-    {{#if isWritten}}
-       <h3>Written</h3>
-        <!--<img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/writtenICO.png" alt="Post Thumbnail" class="thumbnail" />-->
-    {{/if}}
-
-        <!--{{#each images}}-->
-    <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-    <!--&lt;!&ndash;TODO Change to thumbnail collection and create link from image&ndash;&gt;-->
-    <!--<img src="{{url}}" alt="Post Thumbnail" class="thumbnail" />-->
-    <!--</div>-->
-    <!--</div>-->
-        <!--{{/each}}-->
+            <h6>
+                <i>Author: {{author}}</i>
+                <span class="pull-right">
+                    <i class="fa fa-comment-o"> {{commentsCount}}</i>
+                    <i class="fa fa-thumbs-o-up"> {{likes}}</i>
+                </span>
+            </h6>
         </div>
     </div>
 </template>

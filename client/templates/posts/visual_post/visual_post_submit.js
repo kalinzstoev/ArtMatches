@@ -59,9 +59,9 @@ Template.visualPostSubmit.events({
         //TODO currently you can't upload the same file name twice
         //TODO think about disabling the submit button and the audio button while uploading
 
-        FS.Utility.eachFile(e, function(file) {
+        FS.Utility.eachFile(e, function(file)
+        {
             var newFile = new FS.File(file);
-            console.log(user.username);
             newFile.username = user.username;
             newFile.userId = user._id;
             newFile.userSlug = Slug.slugify(user.username);
