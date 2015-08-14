@@ -16,6 +16,10 @@ Meteor.publish('artmatches', function(){
     return Artmatches.find();
 });
 
+Meteor.publish('submissions', function(){
+    return Submissions.find();
+});
+
 
 Meteor.publish('images', function(){
     return Images.find();

@@ -2,9 +2,10 @@
     <form class="main form page">
 
         {{#if isFileUploading}}
-            <h2>Uploading...</h2>
+            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
+            <h5>Uploading...</h5>
         {{/if}}
-        {{#each audios}}
+        {{#with audio}}
             <a class="delete-audio">
                 <i class="fa fa-trash fa-2x"></i>
             </a>
@@ -14,14 +15,14 @@
                 <source src="{{url}}"  type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-        {{/each}}
+        {{/with}}
 
-        <div class="form-group {{errorClass 'isFilePresent'}}">
+        <div class="form-group {{errorClass 'isContentPresent'}}">
             <div class="controls">
-            <span class="btn btn-default btn-file">
-            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio">
+            <span class="btn btn-default btn-file {{disableUploadButton}}">
+            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio" {{disableUploadButton}}>
             </span>
-                <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
+                <span class="help-block">{{errorMessage 'isContentPresent'}}</span>
             </div>
         </div>
 
@@ -81,8 +82,8 @@
         </div>
 
 
-        <input type="submit" value="Submit" class="btn-lg btn-primary"/>
-        <a class="btn btn-danger delete" href="#">Delete post</a>
+        <input type="submit" value="Save" class="btn btn-primary"/>
+        <a class="btn btn-danger delete" href="#">Delete</a>
     </form>
 </template>
 

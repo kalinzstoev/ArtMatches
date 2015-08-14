@@ -1,0 +1,9 @@
+<template name="artmatchesList">
+<h1>Artmatches</h1>
+    {{#each artmatches}}
+        <p>
+            <a href="{{pathFor 'artmatchPage'}}">{{title}}</a>
+        </p>
+    {{/each}}
+
+</template>

@@ -4,7 +4,7 @@
         <div class="panel panel-default zero-margin-bottom">
             <div class="panel-body">
                 <div class="row">
-                    <h1 class="loffset15px">{{originalTitle}}</h1>
+                    <h1 class="loffset15px">{{title}}</h1>
                 </div>
 
                 <div class="panel panel-default">
@@ -18,19 +18,21 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        {{#with visual}}
-                            <div class="col-md-12">
-                                <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
-                            </div>
-                        {{/with}}
+                {{#each submissions}}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{title}}
+                            {{author}}
+                            {{votes}}
+                            {{#with visual content}}
+                                <div class="col-md-12">
+                                    <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                                </div>
+                            {{/with}}
+                        </div>
                     </div>
-                </div>
-
-                {{#each posts}}
-                    {{title}}
                 {{/each}}
+
 
                 <div class="panel panel-default">
                     <div class="panel-heading">

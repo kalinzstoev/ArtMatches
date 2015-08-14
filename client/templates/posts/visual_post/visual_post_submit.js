@@ -22,6 +22,12 @@ Template.visualPostSubmit.helpers({
 
     isFileUploading: function() {
         return Session.get('isFileUploading');
+    },
+
+    disableUploadButton: function(){
+        if (Session.get('isFileUploading')==true){
+            return "disabled";
+        }
     }
 });
 
@@ -36,7 +42,7 @@ Template.visualPostSubmit.events({
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
             filesIdArray: filesIdArray.slice(),
-            isFilePresent: filesIdArray.length > 0
+            isContentPresent: filesIdArray.length > 0
         };
 
         var errors = validateFilePost(post);

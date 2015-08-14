@@ -1,27 +1,30 @@
 <template name="audioPostSubmit">
     <form class="main form page">
 
+        <!--TODO handle iframe embed and disabling button if content is not ""-->
         {{#if isFileUploading}}
-            <h2>Uploading...</h2>
+            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
+            <h5>Uploading...</h5>
         {{/if}}
-        {{#each audios}}
-                <a class="delete-audio">
-                    <i class="fa fa-trash fa-2x"></i>
-                </a>
-                <h3>{{name}}</h3>
-                <audio controls>
-                    <source src="{{url}}"  type="audio/ogg">
-                    <source src="{{url}}"  type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-        {{/each}}
 
-        <div class="form-group {{errorClass 'isFilePresent'}}">
+        {{#with audio}}
+            <a class="delete-audio">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
+            <h3>{{name}}</h3>
+            <audio controls>
+                <source src="{{url}}"  type="audio/ogg">
+                <source src="{{url}}"  type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {{/with}}
+
+        <div class="form-group {{errorClass 'isContentPresent'}}">
             <div class="controls">
-            <span class="btn btn-default btn-file">
-            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio">
+            <span class="btn btn-default btn-file" {{disableUploadButton}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio" {{disableUploadButton}}>
             </span>
-                <span class="help-block">{{errorMessage 'isFilePresent'}}</span>
+                <span class="help-block">{{errorMessage 'isContentPresent'}}</span>
             </div>
         </div>
 

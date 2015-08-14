@@ -21,7 +21,7 @@
             </li>
         </ul>
 
-        <form class="navbar-form">
+        <form class="navbar-form navbar-left">
             <div class="form-group">
                 <select name="post-type" class="large-select loffset2" id="post-type">
                     <option value="">Types (All)</option>
@@ -104,6 +104,12 @@
                 </select>
             </div>
         </form>
+
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="{{pathFor 'artmatchesList'}}">Artmatches</a>
+            </li>
+        </ul>
     </nav>
     <!--Second navigation bar - End-->
 
@@ -124,7 +130,7 @@
     {{/if }}
 
     {{#if nextPath}}
-        <div class="span7 voffset7 text-center">
+        <div class="text-center">
             <a class="btn btn-primary" href="{{nextPath}}">Load more...</a>
         </div>
     {{else}}

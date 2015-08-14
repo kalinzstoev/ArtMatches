@@ -5,10 +5,8 @@ Template.postPage.helpers({
         })
     },
 
-    audios: function() {
-        return Audios.find({
-            '_id': {$in: this.filesIdArray}
-        })
+    audio: function() {
+        return Audios.findOne({_id: this.content})
     },
 
     tags: function(){

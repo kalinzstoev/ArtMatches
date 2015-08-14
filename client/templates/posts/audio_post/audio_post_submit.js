@@ -1,8 +1,6 @@
-//Template reactive array variable
-var filesIdArray = new ReactiveArray();
-
 Template.audioPostSubmit.onCreated(function() {
     Session.set('audioPostSubmitErrors', {});
+    var content = new ReactiveVar("");
 });
 
 Template.audioPostSubmit.helpers({
@@ -12,15 +10,20 @@ Template.audioPostSubmit.helpers({
     errorClass: function (field) {
         return !!Session.get('audioPostSubmitErrors')[field] ? 'has-error' : '';
     },
-    audios: function() {
-        if (filesIdArray.list().length > 0){
-            return Audios.find({
-                '_id': {$in: filesIdArray.array()}
-            })
+    audio: function() {
+        if (content.get() != ""){
+            return Audios.findOne({_id: content.get()})
         }
     },
     isFileUploading: function() {
         return Session.get('isFileUploading');
+    },
+
+    disableUploadButton: function(){
+        console.log(content.get());
+        if (Session.get('isFileUploading')==true || content.get()!="") {
+            return "disabled";
+        }
     }
 });
 
@@ -32,16 +35,17 @@ Template.audioPostSubmit.events({
             postType: 'audio',
             title: $(e.target).find('[name=title]').val(),
             //TODO check if a file or an embeded file was submitted
-            soundcloud: $(e.target).find('[name=soundcloud]').val(),
+            content: content.get(),
+            //soundcloud: $(e.target).find('[name=soundcloud]').val(),
+
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            filesIdArray: filesIdArray.slice(),
-            isFilePresent: filesIdArray.length > 0
+            isContentPresent: content.get() != ""
         };
 
         var errors = validateFilePost(post);
-        if (errors.title || errors.category || errors.filesIdArray)
+        if (errors.title || errors.category || errors.isContentPresent)
             return Session.set('audioPostSubmitErrors', errors);
 
         Meteor.call('postFileInsert', post, function(error, result) {
@@ -49,7 +53,7 @@ Template.audioPostSubmit.events({
             if (error) {
                 return throwError(error.reason);
             }else {
-                filesIdArray.clear();
+                content.set("");
                 Router.go('postPage', {_id: result._id});
             }
         });
@@ -78,7 +82,7 @@ Template.audioPostSubmit.events({
                         if (result.hasStored('audios')) {
                         // File has been uploaded and stored. Can safely display it on the page.
                             toastr.success('File upload succeeded!');
-                            filesIdArray.push(result._id);
+                            content.set(result._id);
                             Session.set('isFileUploading', false);
                             // File has stored, close out interval
                             Meteor.clearInterval(intervalHandle);
@@ -95,11 +99,11 @@ Template.audioPostSubmit.events({
         var sure = confirm('Are you sure you want to delete this audio?');
         if (sure === true) {
             var audioId = this._id;
-            Audios.remove({ _id:audioId }, function(error,result) {
+            Audios.remove({ _id:audioId }, function(error) {
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 } else {
-                    filesIdArray.remove(audioId);
+                    content.set("");
                     toastr.success('Audio deleted!');
                 }
             })

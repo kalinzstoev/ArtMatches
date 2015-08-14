@@ -178,3 +178,11 @@
 .iframe-custom-size iframe{
     height: 100px !important;
 }
+
+.delete-audio, .delete-image{
+    cursor: pointer;
+}
+
+.delete-audio:hover, .delete-image:hover {
+    color: darkred;
+}

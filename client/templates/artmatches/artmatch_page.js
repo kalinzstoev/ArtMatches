@@ -5,16 +5,26 @@ Template.artmatchPage.helpers({
         })
     },
 
-    visual: function(){
+    visual: function(content){
         return Images.findOne({
-            _id: this.posts[0].content
+            _id: content
+        })
+    },
+
+    submissions: function(){
+        return Submissions.find({
+            '_id': {$in: this.submissionsId}
         })
     },
 
     posts: function () {
-
+        console.log("in posts")
+        return Template.instance().posts();
     }
 
+//I will use array of posts with their content and onCreated
+// I will check against all posts if these posts are still present if not the post would be removed from the array
+//If the imagesFindOne returns undefined just flag the post as faulty and remove it same for audios. Written it doesn't matter since the content will be denormalized anyway.
 
 
     //audios: function() {

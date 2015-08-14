@@ -32,6 +32,12 @@ Template.visualPostEdit.helpers({
     },
     isFileUploading: function() {
         return Session.get('isFileUploading');
+    },
+
+    disableUploadButton: function(){
+        if (Session.get('isFileUploading')==true){
+            return "disabled";
+        }
     }
 });
 
@@ -47,11 +53,11 @@ Template.visualPostEdit.events({
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
             filesIdArray: filesIdArray.slice(),
-            isFilePresent: filesIdArray.length > 0
+            isContentPresent: filesIdArray.length > 0
         }
 
         var errors = validateFilePost(postProperties);
-        if (errors.title || errors.category ||errors.isFilePresent)
+        if (errors.title || errors.category ||errors.isContentPresent)
             return Session.set('visualPostEditErrors', errors);
 
         Posts.update(currentPostId, {$set: postProperties}, function(error) {

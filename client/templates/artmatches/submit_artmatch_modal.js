@@ -1,7 +1,40 @@
 var selectedImagePostId;
 var selectedImageId;
-var selectedAudioId;
-var selectedWrittenId;
+var selectedAudioPostId;
+var selectedAudioContent;
+var selectedWrittenPostId;
+var selectedWrittenContent;
+
+var artmatchInsert = function(currentPost,submissionId){
+    var artmatch = {
+        originalPostId: currentPost._id,
+        title: currentPost.title,
+        userId: currentPost.userId,
+        author: currentPost.author,
+        type: currentPost.postType,
+        tags: currentPost.tags.slice(0),
+        submissionsId: [],
+        content: "test"
+    }
+
+    if (currentPost.postType=="visual"){
+        artmatch  = _.extend(artmatch, {
+                imagesIdArray: currentPost.filesIdArray.slice(0)
+            }
+        )
+    }
+    artmatch.submissionsId.push(submissionId);
+
+    Meteor.call('artmatchInsert', artmatch, function(error, result) {
+        // display the error to the user and abort
+        if (error) {
+            return throwError(error.reason);
+        }else {
+            console.log ("artmatch insert successful");
+            console.log ("the id is " + result._id);
+        }
+    });
+}
 
 
 Template.submitArtMatch.events({
@@ -19,44 +52,29 @@ Template.submitArtMatch.events({
 
     'click #submit-content': function (event) {
         event.preventDefault();
-        console.log("post " + selectedImagePostId);
-        console.log("imageId "+ selectedImageId);
-        console.log("audioId "+ selectedAudioId);
-        console.log("writtenId " + selectedWrittenId);
-        console.log(this);
 
-        var artmatch = {
-            originalPostId: this._id,
-            originalTitle: this.title + " - ArtMatch",
-            originalContent: "",
-            imagesIdArray: [],
-            tags: this.tags.slice(0),
-            posts: [],
-            postsId: []
-        }
+        var submissionId ="";
+        var currentPost = this;
 
-        if (this.postType=="visual"){
-            artmatch.originalContent = " ";
-            artmatch.imagesIdArray = this.filesIdArray.slice(0);
-            artmatch.posts.push({
-                postId: selectedImagePostId,
-                title: "the post title",
-                type: "the post type",
-                content: selectedImageId
-            });
-
-            artmatch.postsId.push(selectedImagePostId);
-        }
-
-        Meteor.call('artmatchInsert', artmatch, function(error, result) {
-            // display the error to the user and abort
-            if (error) {
-                return throwError(error.reason);
-            }else {
-                console.log ("insert successful");
-                console.log ("the id is " + result._id);
+        if (Session.get('postTypeTab')=="visual") {
+            var submission = {
+                originalPostId: selectedImagePostId,
+                title: "test title",
+                type: 'visual',
+                content: selectedImageId,
             }
-        });
+
+            Meteor.call('submissionInsert', submission, function (error, result) {
+                // display the error to the user and abort
+                if (error) {
+                    return throwError(error.reason);
+                } else {
+                    console.log("submission insert successful");
+                    submissionId = result._id;
+                    artmatchInsert(currentPost,submissionId);
+                }
+            });
+        }
     },
 
     'click #post-type-tabs':function(event) {
@@ -75,11 +93,13 @@ Template.submitArtMatch.events({
     },
 
     'change #audio-button-group':function(){
-        selectedAudioId = $('#audio-button-group input:radio:checked').val();
+        selectedAudioPostId = $('#audio-button-group input:radio:checked').val();
+        var post = Posts.findOne({_id: selectedAudioPostId});
+        console.log(post);
     },
 
     'change #written-button-group':function(){
-        selectedWrittenId = $('#written-button-group input:radio:checked').val();
+        selectedWrittenPostId = $('#written-button-group input:radio:checked').val();
     }
 
 });
@@ -91,7 +111,7 @@ Template.submitArtMatch.helpers({
     },
 
     isPostTabVisual: function(){
-      return Session.get('postTypeTab')=='visual';
+        return Session.get('postTypeTab')=='visual';
     },
 
     // are there more posts to show?

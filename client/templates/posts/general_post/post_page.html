@@ -18,7 +18,7 @@
                         {{/if}}
                     </h1>
                 </div>
-
+                
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -33,14 +33,14 @@
                         {{/if}}
 
                         {{#if isAudio}}
-                            {{#each audios}}
+                            {{#with audio}}
                                 <p>{{name}}</p>
                                 <audio controls>
                                     <source src="{{url}}"  type="audio/ogg">
                                     <source src="{{url}}"  type="audio/mpeg">
                                     Your browser does not support the audio element.
                                 </audio>
-                            {{/each}}
+                            {{/with}}
                             <div class="iframe-custom-size">
                                 {{{soundcloud}}}
                             </div>
