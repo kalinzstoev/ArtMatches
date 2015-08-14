@@ -1,8 +1,10 @@
 //Template reactive array variable
-var filesIdArray = new ReactiveArray();
+
 
 Template.visualPostSubmit.onCreated(function() {
     Session.set('visualPostSubmitErrors', {});
+    var instance = this;
+    instance.filesIdArray = new ReactiveArray();
 });
 
 Template.visualPostSubmit.helpers({
@@ -13,9 +15,10 @@ Template.visualPostSubmit.helpers({
         return !!Session.get('visualPostSubmitErrors')[field] ? 'has-error' : '';
     },
     images: function() {
-        if (filesIdArray.list().length > 0){
+
+        if (Template.instance().filesIdArray.list().length > 0){
             return Images.find({
-                '_id': {$in: filesIdArray.array()}
+                '_id': {$in: Template.instance().filesIdArray.array()}
             })
         }
     },
@@ -32,7 +35,7 @@ Template.visualPostSubmit.helpers({
 });
 
 Template.visualPostSubmit.events({
-    'submit form': function(e) {
+    'submit form': function(e, instance) {
         e.preventDefault();
 
         var post = {
@@ -41,8 +44,8 @@ Template.visualPostSubmit.events({
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            filesIdArray: filesIdArray.slice(),
-            isContentPresent: filesIdArray.length > 0
+            filesIdArray: instance.filesIdArray.slice(),
+            isContentPresent: instance.filesIdArray.length > 0
         };
 
         var errors = validateFilePost(post);
@@ -54,13 +57,13 @@ Template.visualPostSubmit.events({
             if (error) {
                 return throwError(error.reason);
             }else {
-                filesIdArray.clear();
+                instance.filesIdArray.clear();
                 Router.go('postPage', {_id: result._id});
             }
         });
     },
 
-    "change .add_image": function(e){
+    "change .add_image": function(e, instance){
         var user = Meteor.user();
         //TODO currently you can't upload the same file name twice
         //TODO think about disabling the submit button and the audio button while uploading
@@ -84,7 +87,7 @@ Template.visualPostSubmit.events({
                         if (result.hasStored('images')) {
                             // File has been uploaded and stored. Can safely display it on the page.
                             Session.set('isFileUploading', false);
-                            filesIdArray.push(result._id);
+                            instance.filesIdArray.push(result._id);
                             toastr.success('File upload succeeded!');
                             // File has stored, close out interval
                             Meteor.clearInterval(intervalHandle);
@@ -95,17 +98,17 @@ Template.visualPostSubmit.events({
         });
     },
 
-    'click .delete-image': function(e) {
+    'click .delete-image': function(e, instance) {
         e.preventDefault();
 
         var sure = confirm('Are you sure you want to delete this image?');
         if (sure === true) {
             var imageId = this._id;
-            Images.remove({ _id:imageId }, function(error,result) {
+            Images.remove({ _id:imageId }, function(error) {
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 } else {
-                    filesIdArray.remove(imageId);
+                    instance.filesIdArray.remove(imageId);
                     toastr.success('Image deleted!');
                 }
             })

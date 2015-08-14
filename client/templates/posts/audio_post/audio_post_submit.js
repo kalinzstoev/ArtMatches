@@ -1,6 +1,7 @@
 Template.audioPostSubmit.onCreated(function() {
     Session.set('audioPostSubmitErrors', {});
-    var content = new ReactiveVar("");
+    var instance = this;
+    instance.content = new ReactiveVar("");
 });
 
 Template.audioPostSubmit.helpers({
@@ -11,8 +12,8 @@ Template.audioPostSubmit.helpers({
         return !!Session.get('audioPostSubmitErrors')[field] ? 'has-error' : '';
     },
     audio: function() {
-        if (content.get() != ""){
-            return Audios.findOne({_id: content.get()})
+        if (Template.instance().content.get() != ""){
+            return Audios.findOne({_id: Template.instance().content.get()})
         }
     },
     isFileUploading: function() {
@@ -20,28 +21,28 @@ Template.audioPostSubmit.helpers({
     },
 
     disableUploadButton: function(){
-        console.log(content.get());
-        if (Session.get('isFileUploading')==true || content.get()!="") {
+        console.log(Template.instance().content.get());
+        if (Session.get('isFileUploading')==true || Template.instance().content.get()!="") {
             return "disabled";
         }
     }
 });
 
 Template.audioPostSubmit.events({
-    'submit form': function(e) {
+    'submit form': function(e, instance) {
         e.preventDefault();
 
         var post = {
             postType: 'audio',
             title: $(e.target).find('[name=title]').val(),
             //TODO check if a file or an embeded file was submitted
-            content: content.get(),
+            content: instance.content.get(),
             //soundcloud: $(e.target).find('[name=soundcloud]').val(),
 
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            isContentPresent: content.get() != ""
+            isContentPresent: instance.content.get() != ""
         };
 
         var errors = validateFilePost(post);
@@ -53,13 +54,13 @@ Template.audioPostSubmit.events({
             if (error) {
                 return throwError(error.reason);
             }else {
-                content.set("");
+                instance.content.set("");
                 Router.go('postPage', {_id: result._id});
             }
         });
     },
 
-    "change .add_audio": function(e){
+    "change .add_audio": function(e, instance){
         var user = Meteor.user();
 
         //TODO currently you can't upload the same file name twice
@@ -82,7 +83,7 @@ Template.audioPostSubmit.events({
                         if (result.hasStored('audios')) {
                         // File has been uploaded and stored. Can safely display it on the page.
                             toastr.success('File upload succeeded!');
-                            content.set(result._id);
+                            instance.content.set(result._id);
                             Session.set('isFileUploading', false);
                             // File has stored, close out interval
                             Meteor.clearInterval(intervalHandle);
@@ -93,7 +94,7 @@ Template.audioPostSubmit.events({
         });
     },
 
-    'click .delete-audio': function(e) {
+    'click .delete-audio': function(e, instance) {
         e.preventDefault();
 
         var sure = confirm('Are you sure you want to delete this audio?');
@@ -103,7 +104,7 @@ Template.audioPostSubmit.events({
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 } else {
-                    content.set("");
+                    instance.content.set("");
                     toastr.success('Audio deleted!');
                 }
             })

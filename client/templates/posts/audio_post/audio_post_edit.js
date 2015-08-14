@@ -1,11 +1,12 @@
 //Template reactive array variable
-var content = new ReactiveVar("");
+
 
 Template.audioPostEdit.onCreated(function() {
     Session.set('audioPostEditErrors', {});
-    content.set("");
+    var instance = this;
+    instance.content = new ReactiveVar("");
     //Add ids of the post instance to the filesIdArray of the template instance
-    content.set(this.data.content);
+    instance.content.set(this.data.content);
 });
 
 Template.audioPostEdit.helpers({
@@ -21,8 +22,8 @@ Template.audioPostEdit.helpers({
         return tags;
     },
     audio: function() {
-        if (content.get() != ""){
-            return Audios.findOne({_id: content.get()})
+        if (Template.instance().content.get() != ""){
+            return Audios.findOne({_id: Template.instance().content.get()})
         }
     },
     isFileUploading: function() {
@@ -30,14 +31,14 @@ Template.audioPostEdit.helpers({
     },
 
     disableUploadButton: function(){
-        if (Session.get('isFileUploading')==true || content.get()!=""){
+        if (Session.get('isFileUploading')==true || Template.instance().content.get()!=""){
             return "disabled";
         }
     }
 });
 
 Template.audioPostEdit.events({
-    'submit form': function(e) {
+    'submit form': function(e, instance) {
         e.preventDefault();
 
         var currentPostId = this._id
@@ -47,8 +48,8 @@ Template.audioPostEdit.events({
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            content: content.get(),
-            isContentPresent: content.get() != ""
+            content: instance.content.get(),
+            isContentPresent: instance.content.get() != ""
         }
 
         var errors = validateFilePost(postProperties);
@@ -60,33 +61,33 @@ Template.audioPostEdit.events({
                 // display the error to the user
                 throwError(error.reason);
             } else {
-                content.set("");
+                instance.content.set("");
                 toastr.success("Post was updated successfully")
                 Router.go('postPage', {_id: currentPostId});
             }
         });
     },
 
-    'click .delete': function(e) {
+    'click .delete': function(e, instance) {
         e.preventDefault();
 
         if (confirm("Delete this post?")) {
             var currentPostId = this._id;
 
-            Audios.remove({ _id: content.get()}, function(error) {
+            Audios.remove({ _id: instance.content.get()}, function(error) {
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 }
             });
 
-            content.set("");
+            instance.content.set("");
             Posts.remove(currentPostId);
             toastr.success("Post deleted!");
             Router.go('home');
         }
     },
 
-    "change .add_audio": function(e){
+    "change .add_audio": function(e, instance){
         var user = Meteor.user();
 
         //TODO currently you can't upload the same file name twice
@@ -109,7 +110,7 @@ Template.audioPostEdit.events({
                         if (result.hasStored('audios')) {
                             // File has been uploaded and stored. Can safely display it on the page.
                             toastr.success('File upload succeeded!');
-                            content.set(result._id);
+                            instance.content.set(result._id);
                             Session.set('isFileUploading', false);
                             // File has stored, close out interval
                             Meteor.clearInterval(intervalHandle);
@@ -120,7 +121,7 @@ Template.audioPostEdit.events({
         });
     },
 
-    'click .delete-audio': function(e) {
+    'click .delete-audio': function(e, instance) {
         e.preventDefault();
 
         var sure = confirm('Are you sure you want to delete this audio?');
@@ -130,7 +131,7 @@ Template.audioPostEdit.events({
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 } else {
-                    content.set("");
+                    instance.content.set("");
                     toastr.success('Audio deleted!');
                 }
             })

@@ -1,12 +1,10 @@
-//Template reactive array variable
-var filesIdArray = new ReactiveArray();
-
 Template.visualPostEdit.onCreated(function() {
     Session.set('visualPostEditErrors', {});
-    filesIdArray.clear();
     //Add ids of the post instance to the filesIdArray of the template instance
+    var instance = this;
+    instance.filesIdArray = new ReactiveArray();
     this.data.filesIdArray.forEach(function(element) {
-        filesIdArray.push(element);
+        instance.filesIdArray.push(element);
     });
 });
 
@@ -24,9 +22,9 @@ Template.visualPostEdit.helpers({
     },
 
     images: function() {
-        if (filesIdArray.list().length > 0){
+        if (Template.instance().filesIdArray.list().length > 0){
             return Images.find({
-                '_id': {$in: filesIdArray.array()}
+                '_id': {$in: Template.instance().filesIdArray.array()}
             })
         }
     },
@@ -42,7 +40,7 @@ Template.visualPostEdit.helpers({
 });
 
 Template.visualPostEdit.events({
-    'submit form': function(e) {
+    'submit form': function(e, instance) {
         e.preventDefault();
 
         var currentPostId = this._id
@@ -52,8 +50,8 @@ Template.visualPostEdit.events({
             description: $(e.target).find('[name=description]').val(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            filesIdArray: filesIdArray.slice(),
-            isContentPresent: filesIdArray.length > 0
+            filesIdArray: instance.filesIdArray.slice(),
+            isContentPresent: instance.filesIdArray.length > 0
         }
 
         var errors = validateFilePost(postProperties);
@@ -65,20 +63,20 @@ Template.visualPostEdit.events({
                 // display the error to the user
                 throwError(error.reason);
             } else {
-                filesIdArray.clear();
+                instance.filesIdArray.clear();
                 toastr.success("Post was updated successfully")
                 Router.go('postPage', {_id: currentPostId});
             }
         });
     },
 
-    'click .delete': function(e) {
+    'click .delete': function(e, instance) {
         e.preventDefault();
 
         if (confirm("Delete this post?")) {
             var currentPostId = this._id;
 
-            filesIdArray.forEach(function(element){
+            instance.filesIdArray.forEach(function(element){
                 Images.remove(element),function (error) {
                     if (error) {
                         toastr.error("Delete failed" + error);
@@ -86,14 +84,14 @@ Template.visualPostEdit.events({
                 }
             });
 
-            filesIdArray.clear();
+            instance.filesIdArray.clear();
             Posts.remove(currentPostId);
             toastr.success("Post deleted!");
             Router.go('home');
         }
     },
 
-    "change .add_image": function(e){
+    "change .add_image": function(e, instance){
         var user = Meteor.user();
         //TODO currently you can't upload the same file name twice
         //TODO think about disabling the submit button and the audio button while uploading
@@ -116,7 +114,7 @@ Template.visualPostEdit.events({
                         if (result.hasStored('images')) {
                             // File has been uploaded and stored. Can safely display it on the page.
                             Session.set('isFileUploading', false);
-                            filesIdArray.push(result._id);
+                            instance.filesIdArray.push(result._id);
                             toastr.success('File upload succeeded!');
                             // File has stored, close out interval
                             Meteor.clearInterval(intervalHandle);
@@ -127,7 +125,7 @@ Template.visualPostEdit.events({
         });
     },
 
-    'click .delete-image': function(e) {
+    'click .delete-image': function(e, instance) {
         e.preventDefault();
 
         var sure = confirm('Are you sure you want to delete this image?');
@@ -137,7 +135,7 @@ Template.visualPostEdit.events({
                 if (error) {
                     toastr.error("Delete failed... " + error);
                 } else {
-                    filesIdArray.remove(imageId);
+                    instance.filesIdArray.remove(imageId);
                     toastr.success('Image deleted!');
                 }
             })
