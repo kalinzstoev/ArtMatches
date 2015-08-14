@@ -175,14 +175,27 @@
     margin-right: 25px;
 }
 
-.iframe-custom-size iframe{
-    height: 100px !important;
+.display-block{
+    display: block;
 }
 
-.delete-audio, .delete-image{
+.iframe-custom-size iframe{
+    height: 150px !important;
+    width: 100% !important;
+}
+
+.delete-audio, .delete-image, .delete-thumbnail{
     cursor: pointer;
 }
 
-.delete-audio:hover, .delete-image:hover {
+.delete-audio:hover, .delete-image:hover, .delete-thumbnail:hover{
     color: darkred;
+}
+
+.no-link-color{
+    color: inherit;
+}
+
+.no-link-color:hover{
+    color: inherit;
 }

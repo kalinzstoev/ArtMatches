@@ -4,7 +4,6 @@ Meteor.startup(function(){
     BrowserPolicy.content.allowOriginForAll('*.gstatic.com');
     BrowserPolicy.content.allowOriginForAll('*.soundcloud.com');
     BrowserPolicy.content.allowOriginForAll('*.youtube.com');
-    BrowserPolicy.content.allowOriginForAll('*.ck-bb.co.uk');
     BrowserPolicy.content.allowOriginForAll('*.bootstrapcdn.com');
     BrowserPolicy.content.allowImageOrigin("*.amazonaws.com")
 

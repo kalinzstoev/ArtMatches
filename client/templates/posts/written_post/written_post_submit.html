@@ -1,5 +1,22 @@
 <template name="writtenPostSubmit">
     <form class="main form page">
+
+        {{#if isFileUploading}}
+            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
+            <h5>Uploading...</h5>
+        {{/if}}
+
+        {{#with thumbnail}}
+            <img src="{{url store="bigThumbs"}}">
+            <a class="delete-thumbnail display-block">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
+        {{/with}}
+
+            <span class="btn btn-default btn-file" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload a thumbnail(optional)<input type="file" class="add_thumbnail" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            </span>
+
         <div class="form-group {{errorClass 'title'}}">
             <label class="control-label" for="title">Title</label>
             <div class="controls">

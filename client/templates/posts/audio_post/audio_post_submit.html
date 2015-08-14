@@ -1,38 +1,47 @@
 <template name="audioPostSubmit">
     <form class="main form page">
 
-        <!--TODO handle iframe embed and disabling button if content is not ""-->
         {{#if isFileUploading}}
             <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
             <h5>Uploading...</h5>
         {{/if}}
 
-        {{#with audio}}
-            <a class="delete-audio">
+        {{#with thumbnail}}
+            <img src="{{url store="bigThumbs"}}">
+            <a class="delete-thumbnail display-block">
                 <i class="fa fa-trash fa-2x"></i>
             </a>
+        {{/with}}
+
+        {{#with audio}}
+
             <h3>{{name}}</h3>
             <audio controls>
                 <source src="{{url}}"  type="audio/ogg">
                 <source src="{{url}}"  type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <a class="delete-audio display-block">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
         {{/with}}
 
-        <div class="form-group {{errorClass 'isContentPresent'}}">
-            <div class="controls">
-            <span class="btn btn-default btn-file" {{disableUploadButton}}>
-            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio" {{disableUploadButton}}>
+
+            <span class="btn btn-info btn-file" {{disableUploadButton}} {{disableWhileUploading}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload an audio<input type="file" class="add_audio" {{disableUploadButton}} {{disableWhileUploading}}>
             </span>
-                <span class="help-block">{{errorMessage 'isContentPresent'}}</span>
-            </div>
-        </div>
+
+            <span class="btn btn-default btn-file" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload a thumbnail(optional)<input type="file" class="add_thumbnail" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            </span>
 
 
-        <div class="form-group">
-            <label class="control-label voffset2" for="soundcloud">Soundcloud</label>
+        <p class="{{errorClass 'isContentPresent'}}">OR <span class="help-block">{{errorMessage 'isContentPresent'}}</span></p>
+
+        <div class="form-group {{errorClass 'isContentPresent'}}">
+            <label class="control-label voffset2" for="embed">Embed Soundcloud/Youtube</label>
             <div class="controls">
-                <input name="soundcloud" id="soundcloud" type="text" value="" placeholder="Enter soundcloud" class="form-control"/>
+                <input name="embed" id="embed" type="text" value="" placeholder="Copy and paste embed code from Soundcloud/Youtube" class="form-control" {{disableEmbedField}} {{disableWhileUploading}}/>
             </div>
         </div>
 

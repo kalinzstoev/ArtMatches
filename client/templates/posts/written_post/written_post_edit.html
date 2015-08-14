@@ -1,6 +1,22 @@
 <template name="writtenPostEdit">
-
     <form class="main form page">
+
+        {{#if isFileUploading}}
+            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
+            <h5>Uploading...</h5>
+        {{/if}}
+
+        {{#with thumbnail}}
+            <img src="{{url store="bigThumbs"}}">
+            <a class="delete-thumbnail display-block">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
+        {{/with}}
+
+        <span class="btn btn-default btn-file" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload a thumbnail<input type="file" class="add_thumbnail" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            </span>
+
         <div class="form-group {{errorClass 'title'}}">
             <label class="control-label" for="title">Title</label>
             <div class="controls">
@@ -74,8 +90,8 @@
             </div>
         </div>
 
-        <input type="submit" value="Submit" class="btn-lg btn-primary"/>
-        <a class="btn btn-danger delete" href="#">Delete post</a>
+        <input type="submit" value="Save" class="btn btn-primary" {{disableWhileUploading}}/>
+        <a class="btn btn-danger delete" href="#" {{disableWhileUploading}}>Delete</a>
     </form>
 </template>
 

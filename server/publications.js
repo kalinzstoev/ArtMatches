@@ -29,6 +29,10 @@ Meteor.publish('audios', function(){
     return Audios.find();
 });
 
+Meteor.publish('thumbnails', function(){
+    return Thumbnails.find();
+});
+
 Meteor.publish('comments', function(postId) {
     check(postId, String);
     return Comments.find({postId: postId});

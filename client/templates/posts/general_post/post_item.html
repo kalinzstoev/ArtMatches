@@ -12,11 +12,15 @@
                 {{#if isWritten}}
                     <i class="fa fa-pencil"></i>
                 {{/if}}
-                <b>{{title}}</b>
+                <a class="no-link-color" href="{{pathFor 'postPage'}}">
+                    <b>{{title}}</b>
+                </a>
             </h6>
         </div>
 
         <div class="panel-body">
+
+            <!--TODO add link to title as well-->
             {{#if isVisual}}
                 {{#each images}}
                     <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
@@ -26,15 +30,33 @@
             {{/if}}
 
             {{#if isAudio}}
-                <a href="{{pathFor 'postPage'}}">
-                    <img src="http://www.ck-bb.co.uk/wp-content/uploads/2014/06/Placeholder-200x200.jpg" alt="Post Thumbnail" class="thumbnail center-block"/>
-                </a>
+
+                {{#if hasThumbnail}}
+                    {{#with thumbnail}}
+                        <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                        </a>
+                    {{/with}}
+                {{else}}
+                    <a href="{{pathFor 'postPage'}}">
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/note-200gray.gif" alt="Post Thumbnail" class="thumbnail center-block"/>
+                    </a>
+                {{/if}}
             {{/if}}
 
             {{#if isWritten}}
-                <a href="{{pathFor 'postPage'}}">
-                    <img src="http://www.ck-bb.co.uk/wp-content/uploads/2014/06/Placeholder-200x200.jpg" alt="Post Thumbnail" class="thumbnail center-block"/>
-                </a>
+
+                {{#if hasThumbnail}}
+                    {{#with thumbnail}}
+                        <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                        </a>
+                    {{/with}}
+                {{else}}
+                    <a href="{{pathFor 'postPage'}}">
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/literature-200gray.gif" alt="Post Thumbnail" class="thumbnail center-block"/>
+                    </a>
+                {{/if}}
             {{/if}}
 
             <h6>
