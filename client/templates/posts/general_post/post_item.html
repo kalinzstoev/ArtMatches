@@ -24,43 +24,43 @@
             {{#if isVisual}}
                 {{#each images}}
                     <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
-                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="mg-responsive thumbnail center-block" />
                     </a>
                 {{/each}}
             {{/if}}
 
             {{#if isAudio}}
-
                 {{#if hasThumbnail}}
                     {{#with thumbnail}}
                         <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
-                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
                         </a>
                     {{/with}}
                 {{else}}
                     <a href="{{pathFor 'postPage'}}">
-                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/note-200gray.gif" alt="Post Thumbnail" class="thumbnail center-block"/>
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/note-200gray.ico" alt="Post Thumbnail" class="img-responsive thumbnail center-block"/>
                     </a>
                 {{/if}}
             {{/if}}
 
             {{#if isWritten}}
-
                 {{#if hasThumbnail}}
                     {{#with thumbnail}}
                         <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
-                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="thumbnail center-block" />
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
                         </a>
                     {{/with}}
                 {{else}}
                     <a href="{{pathFor 'postPage'}}">
-                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/literature-200gray.gif" alt="Post Thumbnail" class="thumbnail center-block"/>
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/literature-200gray.ico" alt="Post Thumbnail" class="img-responsive thumbnail center-block"/>
                     </a>
                 {{/if}}
             {{/if}}
 
             <h6>
-                <i>Author: {{author}}</i>
+                Author: <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
+                {{author}}
+                </a>
                 <span class="pull-right">
                     <i class="fa fa-comment-o"> {{commentsCount}}</i>
                     <i class="fa fa-thumbs-o-up"> {{likes}}</i>

@@ -173,14 +173,11 @@ Template.audioPostEdit.events({
             Thumbnails.insert(newFile, function (error, result) {
                 if (error) {
                     toastr.error("File upload failed... please try again.");
-                    console.log(error);
                 } else {
 
                     Session.set('isFileUploading', true);
 
                     var intervalHandle = Meteor.setInterval(function () {
-                        console.log("bigThumbs " +result.hasStored('bigThumbs'));
-                        console.log("smallThumbs " +result.hasStored('smallThumbs'));
 
                         if (result.hasStored('bigThumbs') && result.hasStored('smallThumbs')) {
                             // File has been uploaded and stored. Can safely display it on the page.

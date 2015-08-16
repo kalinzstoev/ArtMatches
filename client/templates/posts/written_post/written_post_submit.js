@@ -56,7 +56,6 @@ Template.writtenPostSubmit.events({
 
         Meteor.call('postTextInsert', post, function(error, result) {
             // display the error to the user and abort
-            console.log(error);
             if (error)
                 return throwError(error.reason);
 

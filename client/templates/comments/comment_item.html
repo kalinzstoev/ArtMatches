@@ -2,16 +2,14 @@
     <li>
         <div class="panel panel-default">
         	  <div class="panel-heading">
-        			<h3 class="panel-title">{{author}} on {{submitted}}</h3>
+
+        			<h3 class="panel-title"><a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
+                        <b>{{author}}</b>
+                    </a> on {{submitted}}</h3>
         	  </div>
         	  <div class="panel-body">
         			{{body}}
         	  </div>
         </div>
-        <!--<h4>-->
-            <!--<span class="author">{{author}}</span>-->
-            <!--<span class="date">on </span>-->
-        <!--</h4>-->
-        <!--<p>{{body}}</p>-->
     </li>
 </template>

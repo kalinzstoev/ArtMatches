@@ -34,7 +34,8 @@ Template.userPosts.onCreated(function () {
     // 1. Initialization
 
     var instance = this;
-    var userId = Meteor.userId();
+
+    var userId = this.data._id;
 
     // initialize the reactive variables
     instance.loaded = new ReactiveVar(0);

@@ -1,29 +1,39 @@
 <template name="userInfo">
-
     <div class="container">
         <div class="row">
-            <img src="https://www.leanstartupmachine.com/images/default_profile_photo.png" class="img-responsive img-rounded loffset1" alt="Profile_Picture">
-            <h2 class="loffset1">{{currentUserName}}</h2>
+            {{#if hasThumbnail}}
+                {{#with thumbnail}}
+                    <img src="{{url store="bigThumbs"}}">
+                {{/with}}
+            {{else}}
+                <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/user-200gray.ico" class="img-responsive img-rounded loffset1" alt="Profile_Picture">
+            {{/if}}
+
+            <div class="row">
+                <h2 class="loffset1">{{username}}
+                    {{#if ownInfo}}
+                        <a href="{{pathFor 'editUserInfo'}}"><button type="button" class="btn btn-warning">Edit Info</button></a>
+                    {{/if}}
+                </h2>
+            </div>
 
             <ul class="list-group">
-                <li class="list-group-item">Gender</li>
-                <li class="list-group-item">Age</li>
-                <li class="list-group-item">Country</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">Email</li>
-                <li class="list-group-item">Number of posts</li>
+                <li class="list-group-item">Gender: {{gender}}</li>
+                <li class="list-group-item">Age: {{age}}</li>
+                <li class="list-group-item">Country: {{country}}</li>
+                <li class="list-group-item">City: {{city}}</li>
+                <li class="list-group-item">Number of posts: {{postsCount}}</li>
+                <li class="list-group-item"><a href="{{pathFor 'userPosts' username=username}}">View all user's posts</a>
+                </li>
             </ul>
 
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="loffset1">
-                        <h3 class="text-primary">User Description</h3>
-                        <p>Bacon ipsum dolor amet picanha cow ground round, pig flank doner pastrami venison leberkas pork loin. Drumstick sausage t-bone sirloin alcatra filet mignon. Jowl prosciutto jerky pork belly t-bone. Pig pork chop landjaeger short ribs pancetta t-bone short loin beef shoulder.
-
-                            Venison pork belly bresaola porchetta shoulder. Swine doner porchetta sirloin. Beef ribs flank alcatra, short ribs pork chop t-bone biltong venison salami. Corned beef drumstick bresaola leberkas spare ribs frankfurter short ribs cow pork belly shank pastrami tenderloin sirloin biltong. Short loin tail pork capicola kielbasa. Tenderloin pork belly beef, jowl kielbasa tri-tip bacon jerky sirloin beef ribs fatback doner pig. Leberkas andouille shank biltong, turducken alcatra meatloaf shankle chuck.
-                        </p>
-                    </div>
-                </div>
+            	  <div class="panel-heading">
+            			<h3 class="panel-title"><b>Description</b></h3>
+            	  </div>
+            	  <div class="panel-body">
+                      <p>{{description}}</p>
+            	  </div>
             </div>
         </div>
     </div>

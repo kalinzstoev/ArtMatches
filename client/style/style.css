@@ -192,10 +192,21 @@
     color: darkred;
 }
 
-.no-link-color{
+.no-link-color, .no-link-color:hover{
     color: inherit;
 }
 
-.no-link-color:hover{
-    color: inherit;
+.no-padding{
+    padding:0 !important;
+    margin:0  !important;
+}
+.center-vertical-block  {
+    display: inline-block;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+}
+
+.no-background:hover{
+    background: none !important;
 }

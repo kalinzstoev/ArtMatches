@@ -6,10 +6,10 @@
             <h5>Uploading...</h5>
         {{/if}}
         {{#each images this}}
-            <a class="delete-image">
+            <img src="{{url store='thumbs'}}" alt="Image thumbnail" class="img-responsive thumbnail" />
+            <a class="delete-image display-block">
                 <i class="fa fa-trash fa-2x"></i>
             </a>
-            <img src="{{url}}" alt="Image thumbnail" class="thumbnail" />
         {{/each}}
 
         <div class="form-group {{errorClass 'isContentPresent'}}">

@@ -7,6 +7,16 @@ Meteor.publish('posts', function (input,options) {
     return Posts.find(input, options);
 });
 
+Meteor.publish('allPostsCount', function() {
+    Counts.publish(this, 'postsCount', Posts.find());
+});
+
+
+Meteor.publish('allUserPostsCount', function(username) {
+    check(username, String);
+    Counts.publish(this, 'userPostsCount', Posts.find({author: username}));
+});
+
 Meteor.publish('singlePost', function(id) {
     check(id, String)
     return Posts.find(id);
@@ -40,4 +50,10 @@ Meteor.publish('comments', function(postId) {
 
 Meteor.publish('notifications', function() {
     return Notifications.find({userId: this.userId, read: false});
+});
+
+Meteor.publish("userData", function (username) {
+    check(username, String);
+    return Meteor.users.find({username: username},
+        {fields: {'profile': 1, 'username': 1}});
 });

@@ -1,3 +1,3 @@
 Template.registerHelper('currentUserName', function () {
-    return Meteor.user() && Slug.slugify(Meteor.user().username);
+    return Meteor.user() && Meteor.user().username;
 });
