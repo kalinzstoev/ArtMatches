@@ -5,6 +5,10 @@ Template.artmatchPage.helpers({
         })
     },
 
+    audio: function() {
+        return Audios.findOne({_id: this.content})
+    },
+
     visual: function(content){
         return Images.findOne({
             _id: content
@@ -60,3 +64,5 @@ Template.artmatchPage.helpers({
     //    }
     //}
 });
+
+Template.artmatchPage.onDestroyed

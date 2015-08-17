@@ -33,18 +33,18 @@
 .comments li p:last-child {
     margin-bottom: 0; }
 
-.posts .spinner-container{
+.submissions .spinner-container{
     position: relative;
     height: 100px;
 }
 
 #main {
-    position: relative;
+    /*position: relative;*/
 }
 .page {
-    position: absolute;
-    top: 0px;
-    width: 100%;
+    /*position: absolute;*/
+    /*top: 0px;*/
+    /*width: 100%;*/
 }
 
 #spinner {
@@ -163,7 +163,7 @@
     width: 100%;
 }
 
-.panel-title, .title-postItem {
+.panel-title, .title-submissionItem {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 13px;

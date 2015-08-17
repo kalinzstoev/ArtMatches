@@ -1,72 +1,76 @@
 <template name="editUserInfo">
-    <form class="main form page">
-        {{#if hasThumbnail}}
-            {{#with thumbnail}}
-                <img src="{{url store="bigThumbs"}}">
-                <a class="delete-thumbnail display-block">
-                    <i class="fa fa-trash fa-2x"></i>
-                </a>
-            {{/with}}
-        {{else}}
-            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/user-200gray.ico" class="img-responsive img-rounded loffset1" alt="Profile_Picture">
-        {{/if}}
+    <div class="container">
 
-        {{#if isFileUploading}}
-            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
-            <h5>Uploading...</h5>
-        {{/if}}
-        <span class="btn btn-default btn-file" {{disableWhileUploading}}>
+        <form class="main form page">
+            {{#if hasThumbnail}}
+                {{#with thumbnail}}
+                    <img src="{{url store="bigThumbs"}}">
+                    <a class="delete-thumbnail display-block">
+                        <i class="fa fa-trash fa-2x"></i>
+                    </a>
+                {{/with}}
+            {{else}}
+                <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/user-200gray.ico" class="img-responsive img-rounded loffset1" alt="Profile_Picture">
+            {{/if}}
+
+            {{#if isFileUploading}}
+                <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/uploading.gif">
+                <h5>Uploading...</h5>
+            {{/if}}
+            <span class="btn btn-default btn-file" {{disableWhileUploading}}>
             <i class="glyphicon glyphicon-upload "></i> Upload profile picture<input type="file" class="add_picture" {{disableWhileUploading}}>
             </span>
 
-        <h2>{{currentUserName}}'s info</h2>
+            <h2>{{currentUserName}}'s info</h2>
 
-        <div class="form-group">
-            <div id="gender-button-group" class="btn-group" data-toggle="buttons">
-                <label class="control-label">Gender: </label>
-                <div class="radio">
-                    <label class="radio-inline"><input type="radio" name="optradio" value="Male" checked>Male</label>
+            <div class="form-group">
+                <div id="gender-button-group" class="btn-group" data-toggle="buttons">
+                    <label class="control-label">Gender: </label>
+                    <div class="radio">
+                        <label class="radio-inline"><input type="radio" name="optradio" value="Male" checked>Male</label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline"><input type="radio" name="optradio" value="Female">Female</label>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label class="radio-inline"><input type="radio" name="optradio" value="Female">Female</label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="age">Age</label>
+                <div class="controls">
+                    <select name="age" id="age" class="form-control">
+                        {{#each ages}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label" for="age">Age</label>
-            <div class="controls">
-                <select name="age" id="age" class="form-control">
-                    {{#each ages}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
+
+            <div class="form-group">
+                <label class="control-label" for="country">Country</label>
+                <div class="controls">
+                    <input name="country" id="country" type="text" value="{{country}}" placeholder="Enter your country" class="form-control"/>
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group">
-            <label class="control-label" for="country">Country</label>
-            <div class="controls">
-                <input name="country" id="country" type="text" value="{{country}}" placeholder="Enter your country" class="form-control"/>
+            <div class="form-group">
+                <label class="control-label" for="city">City</label>
+                <div class="controls">
+                    <input name="city" id="city" type="text" value="{{city}}" placeholder="Enter your city" class="form-control"/>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label" for="city">City</label>
-            <div class="controls">
-                <input name="city" id="city" type="text" value="{{city}}" placeholder="Enter your city" class="form-control"/>
+            <div class="form-group">
+                <label class="control-label" for="description">Enter your description</label>
+                <div class="controls">
+                    <textarea name="description" id="description" rows="5" type="text" value="{{description}}" placeholder="Your description" class="form-control"></textarea>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label" for="description">Enter your description</label>
-            <div class="controls">
-                <textarea name="description" id="description" rows="5" type="text" value="{{description}}" placeholder="Your description" class="form-control"></textarea>
-            </div>
-        </div>
+            <input type="submit" value="Save" class="btn btn-primary"/>
+            <a class="btn btn-danger delete" href="#">Delete Your Profile</a>
+        </form>
+    </div>
 
-        <input type="submit" value="Save" class="btn btn-primary"/>
-        <a class="btn btn-danger delete" href="#">Delete Your Profile</a>
-    </form>
 </template>

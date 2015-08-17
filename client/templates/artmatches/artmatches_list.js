@@ -4,4 +4,4 @@ Template.artmatchesList.helpers({
         return Artmatches.find();
     }
 
-    });
+});

@@ -1,0 +1,15 @@
+<template name="submissionItem">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5><a href="#" class="upvote btn btn-default"><i class="fa fa-arrow-up"></i></a>
+                    <b class="loffset1">{{title}}</b>
+                    by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a> votes: {{votes}}
+                    <div class="pull-right">
+                        <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#submission-content">See Content</button>
+                    </div>
+                </h5>
+            </div>
+        </div>
+    </div>
+</template>

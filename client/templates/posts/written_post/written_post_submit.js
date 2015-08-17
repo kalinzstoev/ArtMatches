@@ -46,12 +46,12 @@ Template.writtenPostSubmit.events({
             thumbnail: instance.thumbnail.get(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            type: $(e.target).find('[name=type]').val(),
+            //type: $(e.target).find('[name=type]').val(),
             text: $('#summernote').code()
         };
-
+        //||errors.type
         var errors = validateTextPost(post);
-        if (errors.title || errors.category ||errors.type ||errors.text)
+        if (errors.title || errors.category ||errors.text)
             return Session.set('writtenPostSubmitErrors', errors);
 
         Meteor.call('postTextInsert', post, function(error, result) {

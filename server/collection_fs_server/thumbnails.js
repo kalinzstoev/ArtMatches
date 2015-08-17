@@ -1,18 +1,9 @@
-var imageStore = new FS.Store.S3("images", {
+var bigThumbStore = new FS.Store.S3("bigThumbs", {
     /* REQUIRED */
     accessKeyId: "AKIAILLXBNDCK75Q47DQ",
     secretAccessKey: "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",
     bucket: "artmatches",
-    region: "eu-west-1"
-});
-
-
-var thumbsStore = new FS.Store.S3("thumbs", {
-    /* REQUIRED */
-    accessKeyId: "AKIAILLXBNDCK75Q47DQ",
-    secretAccessKey: "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",
-    bucket: "artmatches.thumbs",
-    region:"eu-west-1",
+    region: "eu-west-1",
 
     transformWrite: function(fileObj, readStream, writeStream) {
         var size = '200';
@@ -21,8 +12,22 @@ var thumbsStore = new FS.Store.S3("thumbs", {
 });
 
 
-Images = new FS.Collection("Images", {
-    stores: [imageStore, thumbsStore],
+var smallThumbStore = new FS.Store.S3("smallThumbs", {
+    /* REQUIRED */
+    accessKeyId: "AKIAILLXBNDCK75Q47DQ",
+    secretAccessKey: "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",
+    bucket: "artmatches.thumbs",
+    region:"eu-west-1",
+
+    transformWrite: function(fileObj, readStream, writeStream) {
+        var size = '30';
+        gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
+    }
+});
+
+
+Thumbnails = new FS.Collection("Thumbnails", {
+    stores: [bigThumbStore, smallThumbStore],
     filter: {
         allow: {
             contentTypes: ['image/*']
@@ -31,7 +36,7 @@ Images = new FS.Collection("Images", {
 });
 
 
-Images.allow({
+Thumbnails.allow({
     insert: function(userId) { return userId != null; },
     remove: function(userId, image) { return userId === image.userId; },
     update: function(userId, image) { return userId === image.userId; },

@@ -1,101 +1,103 @@
 <template name="postPage">
     {{>submitArtMatch}}
-    <div class="post-page page">
-        <div class="panel panel-default zero-margin-bottom">
-            <div class="panel-body">
-                <div class="row">
-                    <h1 class="loffset15px">{{title}}
-                        {{#if ownPost}}
-                            {{#if isVisual}}
-                                <a href="{{pathFor 'visualPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
-                            {{/if}}
-                            {{#if isAudio}}
-                                <a href="{{pathFor 'audioPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
-                            {{/if}}
-                            {{#if isWritten}}
-                                <a href="{{pathFor 'writtenPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
-                            {{/if}}
-                        {{/if}}
-                    </h1>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-body">
-
-                        <!--TODO consider using a carousel to display multiple images-->
-                        {{#if isVisual}}
-                            {{#each images}}
-                                <div class="col-md-12">
-                                    <!--TODO add indivudual link to each image-->
-                                    <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
-                                </div>
-                            {{/each}}
-                        {{/if}}
-
-                        {{#if isAudio}}
-                            {{#if embed}}
-                                <div class="iframe-custom-size">
-                                    {{{content}}}
-                                </div>
-                            {{else}}
-                                {{#with audio}}
-                                    <p>{{name}}</p>
-                                    <audio controls>
-                                        <source src="{{url}}"  type="audio/ogg">
-                                        <source src="{{url}}"  type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                {{/with}}
-                            {{/if}}
-                        {{/if}}
-
-                        <p>{{{text}}}</p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Description</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{description}}</p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Details</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>Author: {{author}}</p>
-                        <p>Submitted: {{submitted}}</p>
-                        <p>Category: {{category}}</p>
-                        <p>Tags: {{tags}}</p>
-                    </div>
-                </div>
-
-                {{#unless ownPost}}
-                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#submit-artmatch">Submit ArtMatch</button>
-                {{/unless}}
-
-            </div>
+    <div class="container">
+        <div class="row">
+            <h1 class="loffset15px">{{title}}
+                {{#if ownPost}}
+                    {{#if isVisual}}
+                        <a href="{{pathFor 'visualPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
+                    {{/if}}
+                    {{#if isAudio}}
+                        <a href="{{pathFor 'audioPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
+                    {{/if}}
+                    {{#if isWritten}}
+                        <a href="{{pathFor 'writtenPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
+                    {{/if}}
+                {{/if}}
+            </h1>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-body">
-                <button type="button" class="btn btn-xs {{likedClass}}"><i class="fa fa-thumbs-o-up"> Like</i></button>
+
+                <!--TODO consider using a carousel to display multiple images-->
+                {{#if isVisual}}
+                    {{#each images}}
+                        <div class="col-md-12">
+                            <!--TODO add indivudual link to each image-->
+                            <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                        </div>
+                    {{/each}}
+                {{/if}}
+
+                {{#if isAudio}}
+                    {{#if embed}}
+                        <div class="iframe-custom-size">
+                            {{{content}}}
+                        </div>
+                    {{else}}
+                        {{#with audio}}
+                            <audio controls>
+                                <source src="{{url}}"  type="audio/ogg">
+                                <source src="{{url}}"  type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        {{/with}}
+                    {{/if}}
+                {{/if}}
+
+                <p>{{{text}}}</p>
             </div>
         </div>
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Description</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{description}}</p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Details</h3>
+            </div>
+            <div class="panel-body">
+                <p>Author: {{author}}</p>
+                <p>Submitted: {{submitted}}</p>
+                <p>Category: {{category}}</p>
+                <p>Tags: {{tags}}</p>
+            </div>
+        </div>
+
+        {{#if currentUser}}
+            {{#unless ownPost}}
+                <button type="button" class="btn btn-success btn-lg loffset15px" data-toggle="modal" data-target="#submit-artmatch">Submit Match</button>
+            {{/unless}}
+
+            <div class="panel panel-default voffset3">
+                <div class="panel-body">
+                    <button type="button" class="btn btn-xs {{likedClass}}"><i class="fa fa-thumbs-o-up"> Like</i></button>
+                </div>
+            </div>
+        {{/if}}
         <ul class="comments">
             {{#each comments}}
                 {{> commentItem}}
             {{/each}}
         </ul>
-
+        <label for="body">
+            <h5>
+                <i class="fa fa-comments-o"></i>
+                <b>Comment on this post</b>
+            </h5>
+        </label>
         {{#if currentUser}}
             {{> commentSubmit}}
         {{else}}
             <p>Please log in to leave a comment.</p>
         {{/if}}
+
     </div>
 </template>

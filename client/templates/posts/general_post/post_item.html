@@ -13,7 +13,7 @@
                     <i class="fa fa-pencil"></i>
                 {{/if}}
                 <a class="no-link-color" href="{{pathFor 'postPage'}}">
-                    <b>{{title}}</b>
+                    <b>{{truncatedTitle}}</b>
                 </a>
             </h6>
         </div>
@@ -58,7 +58,7 @@
             {{/if}}
 
             <h6>
-                Author: <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
+                by user: <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
                 {{author}}
                 </a>
                 <span class="pull-right">

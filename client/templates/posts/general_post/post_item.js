@@ -18,6 +18,25 @@ Template.postItem.helpers({
             )
         }
         return result;
+    },
+
+    truncatedTitle: function(){
+
+        if (this.title.length>=30){
+            var truncatedTitle = this.title.substring(0,30);
+            var lastIndexOfSpace = truncatedTitle.lastIndexOf(" ");
+            console.log(this.title);
+            console.log(this.title.length);
+            console.log(lastIndexOfSpace);
+            if (lastIndexOfSpace>0){
+                truncatedTitle = truncatedTitle.substring(0, lastIndexOfSpace) + "...";
+            }else{
+                truncatedTitle = truncatedTitle.substring(0, 27) + "...";
+            }
+            return truncatedTitle;
+        }else{
+            return this.title;
+        }
     }
 });
 

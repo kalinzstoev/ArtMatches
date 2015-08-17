@@ -54,12 +54,13 @@ Template.writtenPostEdit.events({
             thumbnail: instance.thumbnail.get(),
             category: $(e.target).find('[name=category]').val(),
             tags: $("#tags").tagsinput('items'),
-            type: $(e.target).find('[name=type]').val(),
+            //type: $(e.target).find('[name=type]').val(),
             text: $('#summernote').code()
         }
 
         var errors = validateTextPost(postProperties);
-        if (errors.title || errors.category ||errors.type ||errors.text)
+        //||errors.type
+        if (errors.title || errors.category  ||errors.text)
             return Session.set('writtenPostEditErrors', errors);
 
         Posts.update(currentPostId, {$set: postProperties}, function(error) {
@@ -162,7 +163,7 @@ Template.writtenPostEdit.rendered = function(){
 
     $('#summernote').code(this.data.text);
     $('#tags').tagsinput();
-    $('#type').val(this.data.type);
+    //$('#type').val(this.data.type);
     $('#category').val(this.data.category);
 };
 
