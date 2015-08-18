@@ -34,13 +34,28 @@ Template.postPage.helpers({
         } else {
             return 'disabled';
         }
+    },
+
+
+    artMatchId: function() {
+        return Session.get('artmatchId');
+       },
+    hasArtMatch: function() {
+        var artmatch = Artmatches.findOne({originalPostId: this._id});
+
+        if (artmatch!=undefined){
+            Session.set('artmatchId', artmatch._id)
+            return true;
+        } else {
+            return false;
+        }
     }
 });
 
 Template.postPage.events({
     'click .likeable': function(e) {
         e.preventDefault();
-        Meteor.call('like', this._id);
+        Meteor.call('postLike', this._id);
     }
 });
 

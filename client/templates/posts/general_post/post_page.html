@@ -3,6 +3,10 @@
     <div class="container">
         <div class="row">
             <h1 class="loffset15px">{{title}}
+
+                {{#if hasArtMatch}}
+                    <a href="/artmatches/{{artMatchId}}"><button type="button" class="btn btn-primary">See Artmatch</button></a>
+                {{/if}}
                 {{#if ownPost}}
                     {{#if isVisual}}
                         <a href="{{pathFor 'visualPostEdit'}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
@@ -18,15 +22,17 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body {{#if isVisual}}panel-image{{/if}}">
 
                 <!--TODO consider using a carousel to display multiple images-->
                 {{#if isVisual}}
                     {{#each images}}
-                        <div class="col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <!--TODO add indivudual link to each image-->
-                            <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                            <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block  "/>
+                            <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
                         </div>
+
                     {{/each}}
                 {{/if}}
 
@@ -46,7 +52,7 @@
                     {{/if}}
                 {{/if}}
 
-                <p>{{{text}}}</p>
+                <div class="written-content-page">{{{text}}}</div>
             </div>
         </div>
 

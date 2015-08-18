@@ -4,13 +4,49 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Submission title</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{#with submission}} {{title}}{{/with}}</h4>
                 </div>
+
                 <div class="modal-body">
+                    {{#with submission}}
+                        {{#if isVisual}}
+                            {{#with singleImage content}}
+                                <div class="col-md-12">
+                                    <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                                </div>
+                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                            {{/with}}
+                        {{/if}}
+                        {{#if isAudio}}
+                            {{#if embed}}
+                                <div class="iframe-custom-size">
+                                    {{{content}}}
+                                </div>
+                            {{else}}
+                                {{#with audio}}
+                                    <audio controls>
+                                        <source src="{{url}}"  type="audio/ogg">
+                                        <source src="{{url}}"  type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                {{/with}}
+                            {{/if}}
+                        {{/if}}
+
+                        {{#if isWritten}}
+                            <div class="written-content">
+                            {{{content}}}
+                            </div>
+                        {{/if}}
+                    {{/with}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button id="submit-content" type="button" class="btn btn-primary">Vote</button>
+                    {{#with submission}}
+                        <div class="text-left">
+                            by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Back</button>
+                        </div>
+                    {{/with}}
                 </div>
             </div>
         </div>

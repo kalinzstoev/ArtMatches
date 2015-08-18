@@ -38,9 +38,6 @@
     height: 100px;
 }
 
-#main {
-    /*position: relative;*/
-}
 .page {
     /*position: absolute;*/
     /*top: 0px;*/
@@ -209,4 +206,34 @@
 
 .no-background:hover{
     background: none !important;
+}
+
+audio { width: 100%; }
+
+img {
+    max-height: inherit;
+    max-widht: inherit;
+}
+
+.panel-image, .panel-image-artmatch{
+    max-width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-underline, .no-underline:hover{
+text-decoration: none !important;
+}
+
+.written-content {
+    width: 100% ;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.written-content-page {
+    width: 100% ;
+    max-height: 600px;
+    overflow: auto;
 }

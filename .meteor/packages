@@ -11,7 +11,6 @@ underscore
 sacha:spin
 accounts-password
 audit-argument-checks
-ian:accounts-ui-bootstrap-3
 fortawesome:fontawesome
 sanjo:jasmine
 msavin:mongol
@@ -33,13 +32,10 @@ service-configuration
 http
 email
 accounts-base
-themeteorchef:bert
 browser-policy
 check
 jquery
-themeteorchef:jquery-validation
-fourseven:scss
 meteorhacks:ssr
 cfs:graphicsmagick
 tmeasday:publish-counts
-peppelg:bootstrap-3-modal
+ian:accounts-ui-bootstrap-3

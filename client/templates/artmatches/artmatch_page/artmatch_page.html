@@ -1,0 +1,206 @@
+<template name="artmatchPage">
+    {{>submissionContent}}
+    <div class="container">
+        <div class="row">
+            <h1 class="loffset15px">{{title}}
+                <a href="/posts/{{originalPostId}}"><button type="button" class="btn btn-primary">See Original</button></a>
+            </h1>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isVisual}}
+                                <i class="fa fa-picture-o"></i>
+                            {{/if}}
+                            {{#if isAudio}}
+                                <i class="fa fa-headphones"></i>
+                            {{/if}}
+                            {{#if isWritten}}
+                                <i class="fa fa-pencil"></i>
+                            {{/if}}
+                            <b>Original</b>
+                        </h3>
+                    </div>
+                    <div class="panel-body {{#if isVisual}}panel-image-artmatch{{/if}}">
+                        {{#if isVisual}}
+                            {{#each images}}
+                                <div class="col-md-12">
+                                    <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                                </div>
+                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                            {{/each}}
+                        {{/if}}
+
+                        {{#if isAudio}}
+                            {{#if embed}}
+                                <div class="iframe-custom-size">
+                                    {{{content}}}
+                                </div>
+                            {{else}}
+                                {{#with audio}}
+                                    <audio controls>
+                                        <source src="{{url}}"  type="audio/ogg">
+                                        <source src="{{url}}"  type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                {{/with}}
+                            {{/if}}
+                        {{/if}}
+
+                        {{#if isWritten}}
+                            {{{content}}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {{#with bestVisual}}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-picture-o"></i> <b>Top Visual Match:</b> {{title}}
+                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                            </h3>
+                        </div>
+                        <div class="panel-body {{#if isVisual}}panel-image-artmatch{{/if}}">
+
+                            {{#with singleImage content}}
+                                <div class="col-md-12">
+                                    <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
+                                </div>
+                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                            {{/with}}
+
+                            {{#unless hasVisualSubmisiion}}
+                                <p>No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+                </div>
+            {{/with}}
+        </div>
+
+
+        <div class="row">
+            {{#with bestAudio}}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-headphones"></i> <b>Top Audio Match:</b> {{title}}
+                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
+                            {{#if isAudio}}
+                                {{#if embed}}
+                                    <div class="iframe-custom-size">
+                                        {{{content}}}
+                                    </div>
+                                {{else}}
+                                    {{#with audio}}
+                                        <audio controls>
+                                            <source src="{{url}}"  type="audio/ogg">
+                                            <source src="{{url}}"  type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    {{/with}}
+                                {{/if}}
+                            {{/if}}
+
+                            {{#unless hasAudioSubmisiion}}
+                                <p>No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+                </div>
+            {{/with}}
+        </div>
+        <div class="row">
+            {{#with bestWritten}}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-pencil"></i> <b>Top Written Match:</b> {{title}}
+                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                            </h3>
+                        </div>
+                        <div class="panel-body written-content">
+
+                            {{#if isWritten}}
+                                {{{content}}}
+                            {{/if}}
+
+                            {{#unless hasWrittenSubmisiion}}
+                                <p>No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+                </div>
+            {{/with}}
+        </div>
+
+        <h3>All match submissions: </h3>
+
+        <ul id="submission-type-tabs" class="nav nav-tabs nav-justified">
+            <li role="presentation"><a data-toggle="tab" href="#submission-visual-tab"><i class="fa fa-picture-o"></i> Visual</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#submission-audio-tab"><i class="fa fa-headphones"></i> Audio</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#submission-written-tab"><i class="fa fa-pencil"></i> Written</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="submission-visual-tab" class="tab-pane fade in active">
+                <div class="container-fluid voffset4">
+                    {{#each submissions}}
+                        {{#if isVisual}}
+                            {{>submissionItem}}
+                        {{/if}}
+                    {{/each}}
+                    {{#unless hasVisualSubmisiion}}
+                        <p class="text-center">No submissions</p>
+                    {{/unless}}
+                </div>
+            </div>
+
+            <div id="submission-audio-tab" class="tab-pane fade in">
+                <div class="container-fluid voffset4">
+                    {{#each submissions}}
+                        {{#if isAudio}}
+                            {{>submissionItem}}
+                        {{/if}}
+                    {{/each}}
+                    {{#unless hasAudioSubmisiion}}
+                        <p class="text-center">No submissions</p>
+                    {{/unless}}
+                </div>
+            </div>
+
+            <div id="submission-written-tab" class="tab-pane fade in">
+                <div class="container-fluid voffset4">
+                    {{#each submissions}}
+                        {{#if isWritten}}
+                            {{>submissionItem}}
+                        {{/if}}
+                    {{/each}}
+                    {{#unless hasWrittenSubmisiion}}
+                        <p class="text-center">No submissions</p>
+                    {{/unless}}
+                </div>
+            </div>
+            <div class="panel panel-default voffset4">
+                <div class="panel-body">
+                    <h1 class="text-center">Comment functionality is coming up!</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
