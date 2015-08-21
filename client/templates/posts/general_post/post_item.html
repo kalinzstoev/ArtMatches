@@ -20,11 +20,10 @@
 
         <div class="panel-body">
 
-            <!--TODO add link to title as well-->
             {{#if isVisual}}
                 {{#each images}}
                     <a href="{{#with ..}}{{pathFor 'postPage'}}{{/with}}">
-                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="mg-responsive thumbnail center-block" />
+                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
                     </a>
                 {{/each}}
             {{/if}}

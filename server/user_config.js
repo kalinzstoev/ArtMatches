@@ -16,8 +16,11 @@ Accounts.onCreateUser(function (options, user) {
         if (!user.username){
             user.username = options.profile.name;
         }
-    options.profile.thumbnail = "";
-    user.profile = options.profile;
+
+    if (options.profile){
+        options.profile.thumbnail = "";
+        user.profile = options.profile;
+    }
 
     return user;
 });

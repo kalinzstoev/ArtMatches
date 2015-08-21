@@ -1,5 +1,4 @@
 <template name="header">
-
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -14,20 +13,21 @@
             <ul class="nav navbar-nav" id="main-navigation">
                 <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
                 {{#if currentUser}}
-                    <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-upload"></i> Submit Post<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{pathFor 'visualPostSubmit'}}"><i class="fa fa-picture-o"></i> Visual</a></li>
-                            <li><a href="{{pathFor 'audioPostSubmit'}}"><i class="fa fa-headphones"></i> Audio</a></li>
-                            <li><a href="{{pathFor 'writtenPostSubmit'}}"><i class="fa fa-pencil"></i> Written</a></li>
-                        </ul>
-                    </li>
-                    <!--<li><a href="#">Messages</a></li>-->
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-upload"></i> Submit Post<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{pathFor 'visualPostSubmit'}}"><i class="fa fa-picture-o"></i> Visual</a></li>
+                                <li><a href="{{pathFor 'audioPostSubmit'}}"><i class="fa fa-headphones"></i> Audio</a></li>
+                                <li><a href="{{pathFor 'writtenPostSubmit'}}"><i class="fa fa-pencil"></i> Written</a></li>
+                            </ul>
+                        </li>
+                        <!--<li><a href="#">Messages</a></li>-->
                 {{/if}}
                 <!--<li><a href="">About</a></li>-->
                 <li><a href="{{pathFor 'searchPosts'}}"><i class="fa fa-search"></i> Search Posts</a></li>
+                <li><a href="{{pathFor 'artmatchesList'}}"><i class="glyphicon glyphicon-text-background"></i> Browse Matches</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right" id="navigation">
@@ -48,15 +48,15 @@
 
                 <li class="center-vertical-block">
                     {{#if currentUser}}
-                    <a class="no-padding no-image-link-color no-background" href="{{pathFor 'userInfo' username=currentUserName}}">
-                        {{#if hasThumbnail}}
-                            {{#with thumbnail}}
+                        <a class="no-padding no-image-link-color no-background" href="{{pathFor 'userInfo' username=currentUserName}}">
+                            {{#if hasThumbnail}}
+                                {{#with thumbnail}}
                                     <img src="{{url store="smallThumbs"}}" class="img-circle" alt="Profile_Picture">
-                            {{/with}}
-                        {{else}}
-                            <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/user-30gray.ico" class="img-circle" alt="Profile_Picture">
-                        {{/if}}
-                    </a>
+                                {{/with}}
+                            {{else}}
+                                <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/user-30gray.ico" class="img-circle" alt="Profile_Picture">
+                            {{/if}}
+                        </a>
                     {{/if}}
                 </li>
                 {{> loginButtons}}

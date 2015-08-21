@@ -13,7 +13,6 @@ Meteor.startup(function() {
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
     Accounts.emailTemplates.verifyEmail.text = function(user, url) {
-        return 'Hello! Thank you for registering with Artmatches. /n' +
-            'Please click on the following link to verify your email address: ' + url;
+        return 'Hello! Thank you for registering with Artmatches. Please click on the following link to verify your email address: ' + url;
     };
 });

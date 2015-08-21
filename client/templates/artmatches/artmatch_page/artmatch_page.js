@@ -1,7 +1,7 @@
 Template.artmatchPage.helpers({
     images: function() {
         return Images.find({
-            '_id': {$in: this.imagesIdArray}
+            '_id': {$in: this.filesIdArray}
         })
     },
 
@@ -22,9 +22,7 @@ Template.artmatchPage.helpers({
     },
 
     submissions: function(){
-        return Submissions.find({
-            '_id': {$in: this.submissionsId}
-        })
+        return Submissions.find({submittedToPostId: this.originalPostId}, {sort: {votes: -1, submitted: -1, _id: -1}});
     },
 
     posts: function () {
@@ -71,6 +69,18 @@ Template.artmatchPage.helpers({
 
     hasWrittenSubmisiion: function(){
         return Session.get("hasWrittenSubmission");
+    },
+
+    visualCount: function(){
+        return Submissions.find({submittedToPostId: this.originalPostId, type: "visual"}).count();
+    },
+
+    audioCount: function(){
+        return Submissions.find({submittedToPostId: this.originalPostId, type: "audio"}).count();
+    },
+
+    writtenCount: function(){
+        return Submissions.find({submittedToPostId: this.originalPostId, type: "written"}).count();
     },
 });
 

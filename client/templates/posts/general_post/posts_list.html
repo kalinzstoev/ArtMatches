@@ -1,10 +1,7 @@
 <template name="postsList">
 
     <div class="container-fluid">
-        <div class="jumbotron center-horizontal">
-            <h1>Jumbotron</h1>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-        </div>
+       {{>welcomeBanner}}
     </div>
 
     <!--Second navigation bar - Start-->
@@ -75,7 +72,7 @@
                                 <option value="other">Other</option>
                                 <option value="pop">Pop</option>
                                 <option value="r&b">R&B</option>
-                                <option value="r&b">Rock</option>
+                                <option value="rock">Rock</option>
                                 <option value="soul">Soul</option>
                             </optgroup>
                         {{/if}}
@@ -104,12 +101,6 @@
                 </select>
             </div>
         </form>
-
-        <ul class="nav navbar-nav navbar-left">
-            <li>
-                <a href="{{pathFor 'artmatchesList'}}">Artmatches</a>
-            </li>
-        </ul>
     </nav>
     <!--Second navigation bar - End-->
 

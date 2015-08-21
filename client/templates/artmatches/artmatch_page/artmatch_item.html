@@ -1,0 +1,66 @@
+<template name="artmatchItem">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h6 class="title-postItem">
+                <i class="glyphicon glyphicon-text-background"></i>
+                {{#if isVisual}}
+                    <i class="fa fa-picture-o"></i>
+                {{/if}}
+                {{#if isAudio}}
+                    <i class="fa fa-headphones"></i>
+                {{/if}}
+                {{#if isWritten}}
+                    <i class="fa fa-pencil"></i>
+                {{/if}}
+                <a class="no-link-color" href="{{pathFor 'artmatchPage'}}">
+                    <b>{{truncatedTitle}}</b>
+                </a>
+            </h6>
+            <h7>
+                <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
+                    {{author}}
+                </a>
+            </h7>
+        </div>
+
+        <div class="panel-body">
+
+            {{#if isVisual}}
+                {{#each images}}
+                    <a href="{{#with ..}}{{pathFor 'artmatchPage'}}{{/with}}">
+                        <img src="{{url store="thumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
+                    </a>
+                {{/each}}
+            {{/if}}
+
+            {{#if isAudio}}
+                {{#if hasThumbnail}}
+                    {{#with thumbnail}}
+                        <a href="{{#with ..}}{{pathFor 'artmatchPage'}}{{/with}}">
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
+                        </a>
+                    {{/with}}
+                {{else}}
+                    <a href="{{pathFor 'artmatchPage'}}">
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/note-200gray.ico" alt="Post Thumbnail" class="img-responsive thumbnail center-block"/>
+                    </a>
+                {{/if}}
+            {{/if}}
+
+            {{#if isWritten}}
+                {{#if hasThumbnail}}
+                    {{#with thumbnail}}
+                        <a href="{{#with ..}}{{pathFor 'artmatchPage'}}{{/with}}">
+                            <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail center-block" />
+                        </a>
+                    {{/with}}
+                {{else}}
+                    <a href="{{pathFor 'artmatchPage'}}">
+                        <img src="https://s3-eu-west-1.amazonaws.com/artmatches/Static/literature-200gray.ico" alt="Post Thumbnail" class="img-responsive thumbnail center-block"/>
+                    </a>
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</template>

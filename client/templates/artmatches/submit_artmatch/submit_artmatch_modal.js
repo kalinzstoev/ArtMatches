@@ -115,10 +115,20 @@ Template.submitArtMatch.events({
                 if (error) {
                     return throwError(error.reason);
                 } else {
-                    submissionId = result._id;
+                    submissionId = result;
 
-                    artmatchInsert(currentPost,submissionId);
+                    Meteor.setTimeout(function () {
+                        artmatchInsert(currentPost,submissionId);
+                    }, 500);
 
+                    Meteor.setTimeout(function () {
+                        Meteor.call('createSubmissionNotification', submissionId, function (error) {
+                            // display the error to the user and abort
+                            if (error) {
+                                return throwError(error.reason);
+                            }
+                        });
+                    }, 1000);
                     toastr.success("The match was successfully submitted!");
                 }
             });
@@ -213,20 +223,22 @@ var artmatchInsert = function(currentPost,submissionId){
         tags: currentPost.tags.slice(0),
         submissionsId: [],
     }
-
     if (currentPost.postType=="visual"){
         artmatch  = _.extend(artmatch, {
-                imagesIdArray: currentPost.filesIdArray.slice(0)
+                filesIdArray: currentPost.filesIdArray.slice(0),
+                thumbnail:""
             }
         )
     }else if(currentPost.postType=="audio"){
         artmatch  = _.extend(artmatch, {
             content: currentPost.content,
-            embed: currentPost.embed
+            embed: currentPost.embed,
+            thumbnail: currentPost.thumbnail,
         })
     }else if(currentPost.postType=="written"){
         artmatch  = _.extend(artmatch, {
-                content: currentPost.text
+                content: currentPost.text,
+                thumbnail: currentPost.thumbnail,
             }
         )
     }

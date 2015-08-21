@@ -12,7 +12,6 @@
                 {{> notificationItem}}
             {{/each}}
         {{else}}
-            <!--TODO No Notifications displays in black instead of white-->
             <li><span class="navbar-text">No Notifications</span></li>
         {{/if}}
     </ul>
@@ -20,10 +19,17 @@
 
 <template name="notificationItem">
     <li>
+        {{#if isComment}}
         <a href="{{notificationPostPath}}">
             <strong>{{commenterName}}</strong> commented on your post
         </a>
+        {{/if}}
+
+        {{#if isMatch}}
+            <a href="{{artmatchPostPath}}">
+                <strong>{{submitterName}}</strong> submitted a match on your post
+            </a>
+        {{/if}}
+
     </li>
 </template>
-
-<!--TODO Add a notification to when a match is submitted-->

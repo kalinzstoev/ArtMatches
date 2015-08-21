@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
                                 </div>
-                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                                <a href="{{pathFor "fullSize"}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
                             {{/each}}
                         {{/if}}
 
@@ -65,7 +65,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <i class="fa fa-picture-o"></i> <b>Top Visual Match:</b> {{title}}
-                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                                by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a> with {{votes}} votes:
                             </h3>
                         </div>
                         <div class="panel-body {{#if isVisual}}panel-image-artmatch{{/if}}">
@@ -74,7 +74,7 @@
                                 <div class="col-md-12">
                                     <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
                                 </div>
-                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                                <a href="{{pathFor 'fullSize'}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
                             {{/with}}
 
                             {{#unless hasVisualSubmisiion}}
@@ -94,7 +94,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <i class="fa fa-headphones"></i> <b>Top Audio Match:</b> {{title}}
-                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                                by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a> with {{votes}} votes:
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -130,7 +130,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <i class="fa fa-pencil"></i> <b>Top Written Match:</b> {{title}}
-                                ,by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                                by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a> with {{votes}} votes:
                             </h3>
                         </div>
                         <div class="panel-body written-content">
@@ -151,13 +151,13 @@
         <h3>All match submissions: </h3>
 
         <ul id="submission-type-tabs" class="nav nav-tabs nav-justified">
-            <li role="presentation"><a data-toggle="tab" href="#submission-visual-tab"><i class="fa fa-picture-o"></i> Visual</a></li>
-            <li role="presentation"><a data-toggle="tab" href="#submission-audio-tab"><i class="fa fa-headphones"></i> Audio</a></li>
-            <li role="presentation"><a data-toggle="tab" href="#submission-written-tab"><i class="fa fa-pencil"></i> Written</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#submission-visual-tab"><i class="fa fa-picture-o"></i> Visual <p class="label label-info submission-counter">{{visualCount}}</p></a></li>
+            <li role="presentation"><a data-toggle="tab" href="#submission-audio-tab"><i class="fa fa-headphones"></i> Audio <p class="label label-info submission-counter">{{audioCount}}</p></a></li>
+            <li role="presentation"><a data-toggle="tab" href="#submission-written-tab"><i class="fa fa-pencil"></i> Written <p class="label label-info submission-counter">{{writtenCount}}</p></a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="submission-visual-tab" class="tab-pane fade in active">
+            <div id="submission-visual-tab" class="tab-pane fade in">
                 <div class="container-fluid voffset4">
                     {{#each submissions}}
                         {{#if isVisual}}
@@ -195,12 +195,6 @@
                     {{/unless}}
                 </div>
             </div>
-            <div class="panel panel-default voffset4">
-                <div class="panel-body">
-                    <h1 class="text-center">Comment functionality is coming up!</h1>
-                </div>
-            </div>
-
         </div>
     </div>
 </template>

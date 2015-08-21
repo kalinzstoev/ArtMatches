@@ -1,9 +1,12 @@
 <template name="artmatchesList">
-<h1>Artmatches</h1>
+    <h1>All Artmatches: </h1>
     {{#each artmatches}}
-        <p>
-            <a href="{{pathFor 'artmatchPage'}}">{{title}}</a>
-        </p>
+        <div class=" col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            {{>artmatchItem}}
+        </div>
     {{/each}}
 
+    {{#unless hasArtmatches}}
+        <h1 class="text-center">No ArtMatches available</h1>
+    {{/unless}}
 </template>
