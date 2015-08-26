@@ -1,5 +1,5 @@
 <template name="searchPosts">
-   <h3>Enter search term here: {{> esInput id="search-header" index="posts" placeholder=""}}</h3>
+   <h3>Enter search term here: {{> esInput index="posts" placeholder=""}}</h3>
 
     <div class="posts voffset2">
         <div class="container-fluid">
@@ -14,14 +14,14 @@
     </div>
 
     <div class="text-center">
-    {{> esLoadMoreButton id="search-header" index="posts" class="btn btn-primary"}}
+    {{> esLoadMoreButton index="posts" class="btn btn-primary"}}
     </div>
 
-    {{#ifEsHasNoResults id="search-header" index="posts"}}
+    {{#ifEsHasNoResults index="posts"}}
         <div class="no-results">No results found!</div>
     {{/ifEsHasNoResults}}
 
-    {{#ifEsIsSearching id="search-header" index="posts"}}
+    {{#ifEsIsSearching index="posts"}}
 
         <div class="container-fluid voffset10">
             <div>{{>spinner}}</div>
