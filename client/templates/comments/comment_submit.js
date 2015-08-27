@@ -35,4 +35,5 @@ Template.commentSubmit.events({
             }
         });
     }
+
 });

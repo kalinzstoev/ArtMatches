@@ -23,3 +23,4 @@ Template.submissionContent.helpers({
         return Audios.findOne({_id: this.content})
     },
 });
+

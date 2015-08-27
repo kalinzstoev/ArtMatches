@@ -28,24 +28,20 @@
                 </div>
             </div>
 
+            <div class="form-group {{errorClass 'text'}}">
+                <label class="control-label" for="formatted-text">Formatted text</label>
+                <div class="controls">
+                    <div id="summernote"></div>
+                    <span class="help-block">{{errorMessage 'text'}}</span>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="control-label" for="description">Description (optional)</label>
                 <div class="controls">
                     <textarea name="description" id="description" rows="5" type="text" value="{{description}}" placeholder="Your description" class="form-control"></textarea>
                 </div>
             </div>
-
-            <!--<div class="form-group {{errorClass 'type'}}">-->
-            <!--<label class="control-label" for="type">Type</label>-->
-            <!--<div class="controls">-->
-            <!--<select name="type" id="type" class="form-control">-->
-            <!--<option value="novel">Novel</option>-->
-            <!--<option value="poem">Poem</option>-->
-            <!--<option value="short-story">Short Story</option>-->
-            <!--</select>-->
-            <!--<span class="help-block">{{errorMessage 'type'}}</span>-->
-            <!--</div>-->
-            <!--</div>-->
 
             <div class="form-group {{errorClass 'category'}}">
                 <label class="control-label" for="category">Category</label>
@@ -82,14 +78,6 @@
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                </div>
-            </div>
-
-            <div class="form-group {{errorClass 'text'}}">
-                <label class="control-label" for="formatted-text">Formatted text</label>
-                <div class="controls">
-                    <div id="summernote"></div>
-                    <span class="help-block">{{errorMessage 'text'}}</span>
                 </div>
             </div>
 

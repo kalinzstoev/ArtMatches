@@ -21,3 +21,5 @@ Slug.slugify = function(value) {
 
     return formatted;
 }
+
+//This code was taken from: http://themeteorchef.com/recipes/slugged-routes/

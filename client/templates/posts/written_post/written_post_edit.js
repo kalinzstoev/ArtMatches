@@ -163,7 +163,6 @@ Template.writtenPostEdit.rendered = function(){
 
     $('#summernote').code(this.data.text);
     $('#tags').tagsinput();
-    //$('#type').val(this.data.type);
     $('#category').val(this.data.category);
 };
 

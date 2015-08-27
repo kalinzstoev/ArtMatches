@@ -1,11 +1,14 @@
 <template name="postPage">
     {{>submitArtMatch}}
     <div class="container">
+        {{#with thumbnail}}
+                <img src="{{url store="bigThumbs"}}" alt="Post Thumbnail"  class="img-responsive thumbnail" />
+        {{/with}}
         <div class="row">
             <h1 class="loffset15px">{{title}}
 
                 {{#if hasArtMatch}}
-                    <a href="/artmatches/{{artMatchId}}"><button type="button" class="btn btn-primary">See Artmatch</button></a>
+                    <a href="/artmatches/{{artMatchId}}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-text-background"></i> See ArtMatch</button></a>
                 {{/if}}
                 {{#if ownPost}}
                     {{#if isVisual}}
@@ -52,13 +55,15 @@
                     {{/if}}
                 {{/if}}
 
+                {{#if isWritten}}
                 <div class="written-content-page">{{{text}}}</div>
+                {{/if}}
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Description</h3>
+                <h3 class="panel-title bold-text">Description</h3>
             </div>
             <div class="panel-body">
                 <p>{{description}}</p>
@@ -67,11 +72,11 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Details</h3>
+                <h3 class="panel-title bold-text">Details</h3>
             </div>
             <div class="panel-body">
-                <p>Author: {{author}}</p>
-                <p>Submitted: {{submitted}}</p>
+                <p>Author: <a class="bold-text" href="{{pathFor 'userInfo' username=author}}">{{author}}</a></p>
+                <p>Submitted: {{submittedParsed}}</p>
                 <p>Category: {{category}}</p>
                 <p>Tags: {{tags}}</p>
             </div>
@@ -79,7 +84,7 @@
 
         {{#if currentUser}}
             {{#unless ownPost}}
-                <button type="button" class="btn btn-success btn-lg loffset15px" data-toggle="modal" data-target="#submit-artmatch">Submit Match</button>
+                <button type="button" class="btn btn-primary btn-lg loffset15px" data-toggle="modal" data-target="#submit-artmatch"><i class="glyphicon glyphicon-text-background"></i> Submit Match</button>
             {{/unless}}
 
             <div class="panel panel-default voffset3">

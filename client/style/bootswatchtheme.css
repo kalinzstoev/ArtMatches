@@ -1090,9 +1090,11 @@ body {
     font-size: 15px;
     line-height: 1.4;
     color: #222222;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     /*background body*/
-    /*background-color: #E9EAED;*/
+    background-color: #f7f7f7;
+    
+
 }
 input,
 button,
@@ -5014,7 +5016,8 @@ a.badge:focus {
     padding-bottom: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #fafafa;
+    border: solid;
+    background-color: #ffffff;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5304,6 +5307,7 @@ a.thumbnail.active {
     margin-bottom: -1px;
     background-color: #ffffff;
     border: 1px solid #dddddd;
+    font-size: 17px;
 }
 .list-group-item:first-child {
     border-top-right-radius: 0;
@@ -5739,7 +5743,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading {
     color: #333333;
-    background-color: #f5f5f5;
+    background-color: #f1f1f1;
     border-color: #dddddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
@@ -5753,22 +5757,22 @@ button.list-group-item-danger.active:focus {
     border-bottom-color: #dddddd;
 }
 .panel-primary {
-    border-color: #008cba;
+    border-color: #333333;
 }
 .panel-primary > .panel-heading {
     color: #ffffff;
-    background-color: #008cba;
-    border-color: #008cba;
+    background-color: #333333;
+    border-color: #333333;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-    border-top-color: #008cba;
+    border-top-color: #333333;
 }
 .panel-primary > .panel-heading .badge {
-    color: #008cba;
+    color: #333333;
     background-color: #ffffff;
 }
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #008cba;
+    border-bottom-color: #333333;
 }
 .panel-success {
     border-color: #3c9a5f;
@@ -5956,7 +5960,7 @@ button.close {
 }
 .modal-content {
     position: relative;
-    background-color: #ffffff;
+    background-color: #f5f8f0;
     border: 1px solid #999999;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0;

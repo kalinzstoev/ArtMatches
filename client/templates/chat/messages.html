@@ -1,0 +1,19 @@
+<template name="messages">
+
+    <div class="panel panel-default chat-panel">
+ 	  <div class="panel-heading">
+    			<h3 class="panel-title"><b>Room: {{roomName}}</b></h3>
+    	  </div>
+    	  <div class="panel-body">
+              <div id="messages" class="written-content">
+                  {{#each messages}}
+                      {{> message}}
+                  {{/each}}
+              </div>
+    	  </div>
+    </div>
+</template>
+
+<template name="message">
+    <p><a href="{{pathFor 'userInfo' username=user}}"><strong>{{user}}</strong></a> <span class="date">({{timestamp}})</span>: <i>{{msg}}</i></p>
+</template>

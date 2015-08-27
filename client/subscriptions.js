@@ -3,6 +3,8 @@ Meteor.subscribe('audios');
 Meteor.subscribe('artmatches');
 Meteor.subscribe('submissions');
 Meteor.subscribe('thumbnails');
+Meteor.subscribe("rooms");
+Meteor.subscribe("messages");
 
 //counter subscriptions
 Meteor.subscribe('allPostsCount');

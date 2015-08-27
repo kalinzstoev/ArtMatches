@@ -1,0 +1,22 @@
+<template name="rooms">
+
+    <div class="panel panel-default chat-panel">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Select a room:</b></h3>
+        </div>
+        <div class="panel-body">
+            <div class="written-content">
+                <ul>
+                    {{#each rooms}}
+                        {{> room}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="room">
+    <li class="chat-room {{roomstyle}}">{{roomName}}</li>
+</template>

@@ -72,18 +72,40 @@ Template.artmatchPage.helpers({
     },
 
     visualCount: function(){
-        return Submissions.find({submittedToPostId: this.originalPostId, type: "visual"}).count();
+        var visualCount = Submissions.find({submittedToPostId: this.originalPostId, type: "visual"}).count();
+        Session.set("visualCount", visualCount);
+        return visualCount;
     },
 
     audioCount: function(){
-        return Submissions.find({submittedToPostId: this.originalPostId, type: "audio"}).count();
+        var audioCount = Submissions.find({submittedToPostId: this.originalPostId, type: "audio"}).count();
+        Session.set("audioCount", audioCount);
+        return audioCount;
     },
 
     writtenCount: function(){
-        return Submissions.find({submittedToPostId: this.originalPostId, type: "written"}).count();
+        var writtenCount = Submissions.find({submittedToPostId: this.originalPostId, type: "written"}).count();
+        Session.set("writtenCount", writtenCount);
+        return writtenCount;
     },
+
 });
 
 Template.artmatchPage.onCreated(function(){
     Session.set("submissionContentId", "no submission");
+});
+
+Template.artmatchPage.onRendered(function(){
+
+    var visualCount = Session.get("visualCount");
+    var audioCount = Session.get("audioCount");
+    var writtenCount = Session.get("writtenCount");
+
+    if (visualCount>0){
+        $('#submission-type-tabs a[href="#submission-visual-tab"]').tab('show');
+    }else if (audioCount>0){
+        $('#submission-type-tabs a[href="#submission-audio-tab"]').tab('show');
+    }else if (writtenCount>0){
+        $('#submission-type-tabs a[href="#submission-written-tab"]').tab('show');
+    }
 });

@@ -49,7 +49,7 @@ Template.visualPostSubmit.events({
         };
 
         var errors = validateFilePost(post);
-        if (errors.title || errors.category || errors.filesIdArray)
+        if (errors.title || errors.category || errors.isContentPresent)
             return Session.set('visualPostSubmitErrors', errors);
 
         Meteor.call('postFileInsert', post, function(error, result) {

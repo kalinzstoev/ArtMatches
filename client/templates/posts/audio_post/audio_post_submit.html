@@ -34,16 +34,16 @@
             </span>
 
             <span class="btn btn-default btn-file" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
-            <i class="glyphicon glyphicon-upload "></i> Upload a thumbnail(optional)<input type="file" class="add_thumbnail" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
+            <i class="glyphicon glyphicon-upload "></i> Upload a thumbnail (optional)<input type="file" class="add_thumbnail" {{disableUploadThumbnailButton}} {{disableWhileUploading}}>
             </span>
 
 
-            <p class="{{errorClass 'isContentPresent'}}">OR <span class="help-block">{{errorMessage 'isContentPresent'}}</span></p>
+            <p class="voffset3 {{errorClass 'isContentPresent'}}">OR <span class="help-block">{{errorMessage 'isContentPresent'}}</span></p>
 
             <div class="form-group {{errorClass 'isContentPresent'}}">
-                <label class="control-label voffset2" for="embed">Embed Soundcloud/Youtube</label>
+                <label class="control-label voffset2" for="embed">Embed an iFrame from Soundcloud or Youtube (use the sharing option of the service)</label>
                 <div class="controls">
-                    <input name="embed" id="embed" type="text" value="" placeholder="Copy and paste embed code from Soundcloud/Youtube" class="form-control" {{disableEmbedField}} {{disableWhileUploading}}/>
+                    <input name="embed" id="embed" type="text" value="" placeholder="Copy and paste an EMBEDED iFrame code from youtube" class="form-control" {{disableEmbedField}} {{disableWhileUploading}}/>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
                         <option value="other">Other</option>
                         <option value="pop">Pop</option>
                         <option value="r&b">R&B</option>
-                        <option value="r&b">Rock</option>
+                        <option value="rock">Rock</option>
                         <option value="soul">Soul</option>
                     </select>
                     <span class="help-block">{{errorMessage 'category'}}</span>

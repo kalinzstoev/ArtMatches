@@ -30,7 +30,7 @@ Template.postPage.helpers({
     likedClass: function() {
         var userId = Meteor.userId();
         if (userId && !_.include(this.likers, userId)) {
-            return 'btn-primary likeable';
+            return 'btn-success likeable';
         } else {
             return 'disabled';
         }
@@ -39,7 +39,7 @@ Template.postPage.helpers({
 
     artMatchId: function() {
         return Session.get('artmatchId');
-       },
+    },
     hasArtMatch: function() {
         var artmatch = Artmatches.findOne({originalPostId: this._id});
 
@@ -49,6 +49,19 @@ Template.postPage.helpers({
         } else {
             return false;
         }
+    },
+
+    thumbnail: function() {
+        if (this.thumbnail != "") {
+            var result = Thumbnails.findOne(
+                {'_id': this.thumbnail}
+            )
+        }
+        return result;
+    },
+
+    submittedParsed: function(){
+        return moment(this.submitted).format('MMMM Do YYYY, h:mm:ss a');
     }
 });
 

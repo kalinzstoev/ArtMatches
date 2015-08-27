@@ -1,0 +1,27 @@
+<template name="submissionItem">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5>
+                    <a href="#" class="upvote btn btn-default {{voteClass}}"><i class="fa fa-arrow-up"> Vote</i></a>
+                    <button type="button" class="see-content btn btn-primary" data-toggle="modal" data-target="#submission-content">See Content</button>
+                    <b class="loffset1">
+                        {{#if isVisual}}
+                            <i class="fa fa-picture-o"></i>
+                        {{/if}}
+                        {{#if isAudio}}
+                            <i class="fa fa-headphones"></i>
+                        {{/if}}
+                        {{#if isWritten}}
+                            <i class="fa fa-pencil"></i>
+                        {{/if}}
+                        {{title}}
+                    </b>
+                    by <a class="" href="{{pathFor 'userInfo' username=author}}">{{author}}</a> votes: {{votes}}
+                    <div class="pull-right">
+                    </div>
+                </h5>
+            </div>
+        </div>
+    </div>
+</template>

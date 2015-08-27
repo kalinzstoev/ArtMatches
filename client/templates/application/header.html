@@ -13,34 +13,26 @@
             <ul class="nav navbar-nav" id="main-navigation">
                 <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
                 {{#if currentUser}}
-                        <li role="presentation" class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-upload"></i> Submit Post<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{pathFor 'visualPostSubmit'}}"><i class="fa fa-picture-o"></i> Visual</a></li>
-                                <li><a href="{{pathFor 'audioPostSubmit'}}"><i class="fa fa-headphones"></i> Audio</a></li>
-                                <li><a href="{{pathFor 'writtenPostSubmit'}}"><i class="fa fa-pencil"></i> Written</a></li>
-                            </ul>
-                        </li>
-                        <!--<li><a href="#">Messages</a></li>-->
+                    <li role="presentation" class="dropdown">
+                        <a id="submit-post" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-upload"></i> Submit Post<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{pathFor 'visualPostSubmit'}}"><i class="fa fa-picture-o"></i> Visual</a></li>
+                            <li><a href="{{pathFor 'audioPostSubmit'}}"><i class="fa fa-headphones"></i> Audio</a></li>
+                            <li><a href="{{pathFor 'writtenPostSubmit'}}"><i class="fa fa-pencil"></i> Written</a></li>
+                        </ul>
+                    </li>
                 {{/if}}
-                <!--<li><a href="">About</a></li>-->
                 <li><a href="{{pathFor 'searchPosts'}}"><i class="fa fa-search"></i> Search Posts</a></li>
-                <li><a href="{{pathFor 'artmatchesList'}}"><i class="glyphicon glyphicon-text-background"></i> Browse Matches</a></li>
+                <li><a href="{{pathFor 'artmatchesList'}}"><i class="glyphicon glyphicon-text-background"></i> Browse ArtMatches</a></li>
+                {{#if currentUser}}
+                    <li><a href="{{pathFor "chat"}}"><i class="fa fa-comments"></i> Chat</a></li>
+                {{/if}}
             </ul>
 
             <ul class="nav navbar-nav navbar-right" id="navigation">
                 {{#if currentUser}}
-                    <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i> My Profile <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{pathFor 'userInfo' username=currentUserName}}"><i class="fa fa-info-circle"></i> Info</a></li>
-                            <li><a href="{{pathFor 'userPosts' username=currentUserName}}"><i class="fa fa-folder"></i> Posts</a></li>
-                        </ul>
-                    </li>
                     <li class="dropdown">
                         {{> notifications}}
                     </li>

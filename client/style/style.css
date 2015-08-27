@@ -85,12 +85,20 @@
 .loffset1 {
     margin-left: 14px;
 }
+
+.loffset15px{
+    margin-left: 15px;
+}
+
 .loffset2 {
     margin-left: 17px;
 }
 
-.loffset15px{
-    margin-left: 15px;
+.roffset1 {
+    margin-right: 14px;
+}
+.roffset2 {
+    margin-right: 14px;
 }
 
 .large-select{
@@ -98,11 +106,13 @@
 }
 
 .navbar .divider-vertical {
-    height: 45px;
+    height: 52px;
+    padding-top: 14px;
     margin-left: 0px;
-    /*border-left: 1px solid #b3b3b3;*/
     border-right: 1px solid #b3b3b3;
 }
+
+
 
 
 .btn-file {
@@ -141,15 +151,13 @@
     width: 100%;
 }
 
-.or-text{
+.or-text, .white-text{
     color: #ffffff;
 }
 
 .control-label{
     color: #000000;
 }
-
-
 
 .zero-margin-bottom{
     margin-bottom: 0;
@@ -160,16 +168,20 @@
     width: 100%;
 }
 
-.panel-title, .title-submissionItem {
+.title-postItem, .title-submissionItem {
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 13px;
+    font-size: 15px;
     color: inherit;
 }
 
 .display-inline {
     display: inline-block;
     margin-right: 25px;
+}
+
+.display-inline-label {
+    display: inline-block;
 }
 
 .display-block{
@@ -181,7 +193,7 @@
     width: 100% !important;
 }
 
-.delete-audio, .delete-image, .delete-thumbnail{
+.delete-audio, .delete-image, .delete-thumbnail, .chat-room, .sort-link{
     cursor: pointer;
 }
 
@@ -216,19 +228,20 @@ img {
 }
 
 .panel-image, .panel-image-artmatch{
-    max-width: 60%;
+    max-width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    min-height: 500px;
 }
 
 .no-underline, .no-underline:hover{
-text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .written-content {
     width: 100% ;
-    max-height: 300px;
+    max-height: 330px;
     overflow: auto;
 }
 
@@ -243,6 +256,32 @@ text-decoration: none !important;
     font-weight: bold;
 }
 
-.submission-counter {
+.bold-text {
     font-weight: bold;
 }
+
+.chat-panel{
+    height: 400px;
+}
+
+.date{
+    font-size: 0.7em;
+}
+.chat-input{
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.second-navbar{
+    padding-left: 0;
+}
+
+.navigation-label, .navbar-nav li a {
+    font-size: 17px;
+}
+
+.navbar-brand{
+    font-size: 22px;
+}
+
+

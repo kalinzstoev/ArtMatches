@@ -19,11 +19,18 @@ Template.userInfo.helpers({
     country:function(){return this.profile.country;},
     city:function(){return this.profile.city;},
     description:function(){
-        if(this.profile.description!=""){
-        return this.profile.description;
-        } else{
-            return "There is no description for this user."
+        var description = "There is no description for this user.";
+        console.log(this.profile.description);
+        if(this.profile.description==undefined){
+            return description;
         }
+        if(this.profile.description!=""){
+            description = this.profile.description;
+            return description;
+        } else{
+            return description;
+        }
+
     }
 });
 

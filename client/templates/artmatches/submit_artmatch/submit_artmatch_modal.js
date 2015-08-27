@@ -144,10 +144,15 @@ Template.submitArtMatch.events({
                     if (error) {
                         return throwError(error.reason);
                     } else {
-                        submissionId = result._id;
-                        Artmatches.update(existingArtmatch._id, {
-                            $addToSet: {submissionsId: submissionId},
+                        submissionId = result;
+
+                        Meteor.call('createSubmissionNotification', submissionId, function (error) {
+                            // display the error to the user and abort
+                            if (error) {
+                                return throwError(error.reason);
+                            }
                         });
+
                         toastr.success("The match was successfully submitted!");
 
                         Meteor.setTimeout(function () {

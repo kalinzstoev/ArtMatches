@@ -57,3 +57,11 @@ Meteor.publish("userData", function (username) {
     return Meteor.users.find({username: username},
         {fields: {'profile': 1, 'username': 1}});
 });
+
+Meteor.publish("rooms", function () {
+    return Rooms.find({});
+});
+
+Meteor.publish("messages", function () {
+    return Messages.find({}, {sort: {ts: -1}});
+});

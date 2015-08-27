@@ -1,7 +1,8 @@
 Template.postsList.onCreated(function(){
     this.postType = new ReactiveVar("");
     this.category = new ReactiveVar("");
-    this.activeRoute = new ReactiveVar();
+    this.activeRoute = new ReactiveVar("newPosts");
+    this.searchInput = new ReactiveVar("");
 });
 
 Template.postsList.helpers({
@@ -16,12 +17,6 @@ Template.postsList.helpers({
         return activeRoute && 'active';
     },
 
-    isAll: function(){
-
-        if ( Template.instance().postType.get() == ""){
-            return true;
-        }
-    },
 
     isVisual: function(){
 
@@ -48,14 +43,58 @@ Template.postsList.helpers({
         if (  type == "written" || type == ""){
             return true;
         }
+    },
+
+    disableCategories: function(){
+
+        var type = Template.instance().postType.get();
+
+        if ( type == ""){
+            return "disabled";
+        }
+    },
+
+    isTypeSelected: function() {
+
+        var type = Template.instance().postType.get();
+
+        if (type == "") {
+            return false;
+        }else{
+            return true;
+        }
+    },
+
+    isSearching: function(){
+        if (Template.instance().searchInput.get() == ""){
+            return false;
+        }else{
+            return true;
+        }
     }
 });
 
 Template.postsList.events({
 
+    "click #new-posts": function(e, template){
+        template.activeRoute.set("newPosts");
+        makeQuery();
+    },
+
+    "click #best-posts": function(e, template){
+        template.activeRoute.set("bestPosts");
+        makeQuery();
+    },
+
+    "click #discussed-posts": function(e, template){
+        template.activeRoute.set("discussedPosts");
+        makeQuery();
+    },
+
     "change #post-type": function(e, template){
 
         template.postType.set($(e.target).val());
+        template.category.set("");
         makeQuery();
     },
 
@@ -63,6 +102,7 @@ Template.postsList.events({
         template.category.set($(e.target).val());
         makeQuery();
     }
+
 });
 
 var makeQuery = function(){
@@ -80,9 +120,9 @@ var makeQuery = function(){
         query = "category=" + Template.instance().category.get();
     }
     if (!query){
-        Router.go(Router.current().route.getName());
+        Router.go(Template.instance().activeRoute.get());
     }
     else {
-        Router.go(Router.current().route.getName(), {}, {query: query});
+        Router.go(Template.instance().activeRoute.get(), {}, {query: query});
     }
 }

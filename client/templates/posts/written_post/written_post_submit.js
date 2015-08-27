@@ -135,6 +135,7 @@ Template.writtenPostSubmit.rendered = function(){
     });
 
     $('#tags').tagsinput();
+    $('#summernote').code("");
 };
 
 

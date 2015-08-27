@@ -1,6 +1,6 @@
 <template name="artmatchItem">
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h6 class="title-postItem">
                 <i class="glyphicon glyphicon-text-background"></i>
@@ -17,15 +17,9 @@
                     <b>{{truncatedTitle}}</b>
                 </a>
             </h6>
-            <h7>
-                <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
-                    {{author}}
-                </a>
-            </h7>
         </div>
 
         <div class="panel-body">
-
             {{#if isVisual}}
                 {{#each images}}
                     <a href="{{#with ..}}{{pathFor 'artmatchPage'}}{{/with}}">

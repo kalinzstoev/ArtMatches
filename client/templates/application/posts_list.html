@@ -1,0 +1,149 @@
+<template name="postsList">
+
+    <div class="container-fluid">
+        {{>welcomeBanner}}
+    </div>
+
+    <!--Second navigation bar - Start-->
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#second-navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="second-navbar collapse navbar-collapse" role="navigation" id="second-navigation">
+            <ul class="nav navbar-nav">
+                <li  class=" {{activeRouteClass 'home' 'newPosts'}}">
+                    <a class="divider-vertical sort-link" id="new-posts">Latest</a>
+                </li>
+                <li  class="{{activeRouteClass  'bestPosts'}}">
+                    <a class="divider-vertical sort-link" id="best-posts">Most Liked</a>
+                </li>
+                <li  class="{{activeRouteClass  'disccusedPosts'}}">
+                    <a class="divider-vertical sort-link" id="discussed-posts">Most Discussed</a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <p class="display-inline-label navigation-label white-text voffset1">Art Type:</p>
+                    <select name="post-type" class="large-select roffset1" id="post-type">
+                        <option value="">All</option>
+                        <option value="visual">Visual</option>
+                        <option value="audio">Audio</option>
+                        <option value="written">Written</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p class="display-inline-label navigation-label white-text voffset1">Categories:</p>
+                    <select name="category" class="large-select" id="category" {{disableCategories}}>
+                        {{#unless isTypeSelected}}
+                            <option value="" selected>Select an art type first</option>
+                        {{/unless}}
+                        {{#if isVisual}}
+                            <option value="">All</option>
+                            <option value="abstract">Abstract</option>
+                            <option value="animals">Animals</option>
+                            <option value="cartoons&comics">Cartoons & Comics</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="game-art">Game Art</option>
+                            <option value="illustration">Illustration</option>
+                            <option value="landscapes&scenery">Landscapes & Scenery</option>
+                            <option value="macabre&horror">Macabre & Horror</option>
+                            <option value="manga&anime">Manga & Anime</option>
+                            <option value="other">Other</option>
+                            <option value="people">People</option>
+                            <option value="political">Political</option>
+                            <option value="popart">Pop Art</option>
+                            <option value="portraits&figures">Portraits & Figures</option>
+                            <option value="psychedelic">Psychedelic</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="space-art">Space Art</option>
+                            <option value="still-life">Still Life</option>
+                            <option value="surreal">Surreal</option>
+                            <option value="technical-drawings">Technical Drawings</option>
+                        {{/if}}
+                        {{#if isAudio}}
+                            <option value="">All</option>
+                            <option value="african">African</option>
+                            <option value="asian-east">Asian-East</option>
+                            <option value="asian-south">Asian-South</option>
+                            <option value="avante-garde">Avante-garde</option>
+                            <option value="blues">Blues</option>
+                            <option value="carribean">Caribbean</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="country">Country</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="folk">Folk</option>
+                            <option value="hip-hop">Hip hop</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="latin">Latin</option>
+                            <option value="lounge">Lounge</option>
+                            <option value="other">Other</option>
+                            <option value="pop">Pop</option>
+                            <option value="r&b">R&B</option>
+                            <option value="rock">Rock</option>
+                            <option value="soul">Soul</option>
+                        {{/if}}
+                        {{#if isWritten}}
+                            <option value="">All</option>
+                            <option value="classic">Classic</option>
+                            <option value="cartoons&comics">Cartoons & Comics</option>
+                            <option value="crime&detective">Crime & Detective</option>
+                            <option value="fable">Fable</option>
+                            <option value="fairy-tale">Fairy tale</option>
+                            <option value="fan-fiction">Fan Fiction</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="folklore">Folklore</option>
+                            <option value="historical">Historical</option>
+                            <option value="horror">Horror</option>
+                            <option value="humour">Humour</option>
+                            <option value="legend">Legend</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="myth">Myth</option>
+                            <option value="other">Other</option>
+                            <option value="sci-fi">Sci-fi</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="western">Western</option>
+                        {{/if}}
+                    </select>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <!--Second navigation bar - End-->
+
+    <div class="posts">
+        <div class="container-fluid">
+            <div class="row">
+                {{#each posts}}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        {{> postItem}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    {{#if isEmpty}}
+        <h1 class="text-center voffset5">No posts available</h1>
+    {{/if }}
+
+    {{#if nextPath}}
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{nextPath}}">Load more...</a>
+        </div>
+    {{else}}
+        {{#unless ready}}
+            {{> spinner}}
+        {{/unless}}
+    {{/if}}
+</template>
+
+
+
+

@@ -14,7 +14,7 @@
                                 <div class="col-md-12">
                                     <img src="{{url}}" alt="Post Image" class="img-responsive voffset2 center-block" />
                                 </div>
-                                <a href="{{url}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
+                                <a href="{{pathFor "fullSize"}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
                             {{/with}}
                         {{/if}}
                         {{#if isAudio}}
@@ -43,7 +43,7 @@
                 <div class="modal-footer">
                     {{#with submission}}
                         <div class="text-left">
-                            by <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
+                            <i class="fa fa-user"></i> <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">{{author}}</a>, votes: {{votes}}
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Back</button>
                         </div>
                     {{/with}}

@@ -2,7 +2,7 @@ Template.submissionItem.helpers({
     voteClass: function() {
         var userId = Meteor.userId();
         if (userId && !_.include(this.voters, userId)) {
-            return 'btn-primary upvoteable';
+            return 'btn-success upvoteable';
         } else {
             return 'disabled';
         }
@@ -18,6 +18,5 @@ Template.submissionItem.events({
     'click .upvoteable': function (event) {
         event.preventDefault();
         Meteor.call('vote', this._id);
-        //var currentArtmatch = Artmatches.findOne({originalPostId: this.submittedToPostId})
     }
 })

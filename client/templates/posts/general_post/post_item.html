@@ -1,6 +1,6 @@
 <template name="postItem">
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h6 class="title-postItem">
                 {{#if isVisual}}
@@ -57,7 +57,8 @@
             {{/if}}
 
             <h6>
-                by user: <a class="no-link-color" href="{{pathFor 'userInfo' username=author}}">
+                <i class="fa fa-user"></i>
+               <a class="no-link-color bold-text" href="{{pathFor 'userInfo' username=author}}">
                 {{author}}
                 </a>
                 <span class="pull-right">

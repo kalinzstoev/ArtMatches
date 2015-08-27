@@ -12,7 +12,6 @@ sacha:spin
 accounts-password
 audit-argument-checks
 fortawesome:fontawesome
-sanjo:jasmine
 msavin:mongol
 cfs:gridfs
 cfs:s3
@@ -35,9 +34,9 @@ accounts-base
 browser-policy
 check
 jquery
-meteorhacks:ssr
 cfs:graphicsmagick
 tmeasday:publish-counts
 houston:admin
 ian:accounts-ui-bootstrap-3
-meteorhacks:sikka
+velocity:console-reporter
+sanjo:jasmine
