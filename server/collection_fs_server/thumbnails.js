@@ -1,7 +1,7 @@
 var bigThumbStore = new FS.Store.S3("bigThumbs", {
     /* REQUIRED */
-    accessKeyId: "AKIAILLXBNDCK75Q47DQ",
-    secretAccessKey: "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",
+    accessKeyId: "",
+    secretAccessKey: "",
     bucket: "artmatches",
     region: "eu-west-1",
 
