@@ -7,6 +7,7 @@ Template.submissionContent.onDestroyed(function(){
 
 Template.submissionContent.helpers({
 
+    //A function which returns the current submission object
     submission:function(){
         var submission = Submissions.findOne({_id: Session.get('submissionContentId')});
         Session.set("submissionObject", submission);

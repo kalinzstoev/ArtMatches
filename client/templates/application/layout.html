@@ -1,5 +1,7 @@
+<!--The main layout of application. -->
 <template name="layout">
     {{>header}}
     {{>errors}}
+        <!--The yield template is a special template for Iron Router which displays the particular template the router has redirected to-->
     {{> yield}}
 </template>

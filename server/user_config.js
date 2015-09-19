@@ -9,10 +9,10 @@ Meteor.methods({
     }
 });
 
+//A function which makes that every user has all the required predefined options whether created through the standard
+//process or through Facebook/Google
 Accounts.onCreateUser(function (options, user) {
     if (options.profile)
-    //TODO trigger a modal to enter a username
-    //TODO update user data with location and gender
         if (!user.username){
             user.username = options.profile.name;
         }

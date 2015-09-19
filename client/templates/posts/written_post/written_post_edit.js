@@ -41,7 +41,7 @@ Template.writtenPostEdit.helpers({
     },
 });
 
-//TODO Consider switching the whole update to the server as right now the edited text doesn't get purified
+
 Template.writtenPostEdit.events({
     'submit form': function(e,instance) {
         e.preventDefault();

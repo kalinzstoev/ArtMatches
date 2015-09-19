@@ -140,15 +140,5 @@ Template.editUserInfo.events({
         toastr.success("Your info was updated successfully!")
         Router.go('userInfo', {username: user.username});
 
-        //Posts.update(currentPostId, {$set: userDetails}, function(error) {
-        //    if (error) {
-        //        // display the error to the user
-        //        throwError(error.reason);
-        //    } else {
-        //
-        //
-        //    }
-        //
-        //},
     }
 });

@@ -1,3 +1,5 @@
+//Client-side collection subscriptions
+
 Meteor.subscribe('images');
 Meteor.subscribe('audios');
 Meteor.subscribe('artmatches');

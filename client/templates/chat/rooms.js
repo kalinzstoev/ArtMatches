@@ -11,6 +11,7 @@ Template.rooms.helpers({
 });
 
 Template.room.helpers({
+    //A helper which makes sure that the active room is highlighted in bold
     roomstyle: function() {
         return Session.equals("roomName", this.roomName) ? "bold-text" : "";
     }

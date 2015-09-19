@@ -1,3 +1,5 @@
+<!--This template uses the https://github.com/matteodem/meteor-easy-search package to search all posts in the database. -->
+<!--The main search is initialized in the posts collection on the server-->
 <template name="searchPosts">
    <h3>Enter search term here: {{> esInput index="posts" placeholder=""}}</h3>
 
@@ -13,14 +15,17 @@
         </div>
     </div>
 
+    <!--Checks if there are more posts-->
     <div class="text-center">
     {{> esLoadMoreButton index="posts" class="btn btn-primary"}}
     </div>
 
+    <!--Checks if there are any results-->
     {{#ifEsHasNoResults index="posts"}}
         <div class="no-results">No results found!</div>
     {{/ifEsHasNoResults}}
 
+    <!--If it is currently searching shows a spinner -->
     {{#ifEsIsSearching index="posts"}}
 
         <div class="container-fluid voffset10">

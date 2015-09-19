@@ -112,10 +112,6 @@ Template.writtenPostSubmit.events({
         }
     },
 
-
-
-
-
 });
 
 Template.writtenPostSubmit.rendered = function(){

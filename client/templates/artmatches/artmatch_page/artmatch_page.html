@@ -1,3 +1,5 @@
+<!--A template which handles the presentation of the ArtMatch page -->
+
 <template name="artmatchPage">
     {{>submissionContent}}
     <div class="container">
@@ -7,62 +9,15 @@
             </h1>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><b>All Match Submissions</b></h3>
-            </div>
-            <div class="panel-body">
-                <ul id="submission-type-tabs" class="nav nav-tabs nav-justified">
-                    <li role="presentation"><a data-toggle="tab" href="#submission-visual-tab"><i class="fa fa-picture-o"></i> Visual <p class="label label-info bold-text">{{visualCount}}</p></a></li>
-                    <li role="presentation"><a data-toggle="tab" href="#submission-audio-tab"><i class="fa fa-headphones"></i> Audio <p class="label label-info bold-text">{{audioCount}}</p></a></li>
-                    <li role="presentation"><a data-toggle="tab" href="#submission-written-tab"><i class="fa fa-pencil"></i> Written <p class="label label-info bold-text">{{writtenCount}}</p></a></li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="submission-visual-tab" class="tab-pane fade in">
-                        <div class="container-fluid voffset4">
-                            {{#each submissions}}
-                                {{#if isVisual}}
-                                    {{>submissionItem}}
-                                {{/if}}
-                            {{/each}}
-                            {{#unless hasVisualSubmisiion}}
-                                <p class="text-center">No submissions</p>
-                            {{/unless}}
-                        </div>
-                    </div>
-
-                    <div id="submission-audio-tab" class="tab-pane fade in">
-                        <div class="container-fluid voffset4">
-                            {{#each submissions}}
-                                {{#if isAudio}}
-                                    {{>submissionItem}}
-                                {{/if}}
-                            {{/each}}
-                            {{#unless hasAudioSubmisiion}}
-                                <p class="text-center">No submissions</p>
-                            {{/unless}}
-                        </div>
-                    </div>
-
-                    <div id="submission-written-tab" class="tab-pane fade in">
-                        <div class="container-fluid voffset4">
-                            {{#each submissions}}
-                                {{#if isWritten}}
-                                    {{>submissionItem}}
-                                {{/if}}
-                            {{/each}}
-                            {{#unless hasWrittenSubmisiion}}
-                                <p class="text-center">No submissions</p>
-                            {{/unless}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
-            <div class="col-xs-12 col-sm-12 {{#if hasVisualSubmisiion}}col-md-6 col-lg-6{{else}} col-md-12 col-lg-12{{/if}}">
+            <div class="col-xs-12 col-sm-12 {{#if hasVisualSubmission}}
+                {{#if isVisual}} col-md-6 col-lg-6
+                {{else}}
+                   col-md-12 col-lg-12
+                {{/if}}
+
+            {{else}} col-md-12 col-lg-12
+            {{/if}}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -113,7 +68,7 @@
 
 
             {{#with bestVisual}}
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 {{#with ..}}{{#if isVisual}} col-md-6 col-lg-6{{else}}col-md-12 col-lg-12{{/if}}{{/with}}">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -131,7 +86,7 @@
                                 <a href="{{pathFor 'fullSize'}}" class="no-underline"><button type="button" class="center-block btn btn-info"><i class="glyphicon glyphicon-zoom-in"></i>Full Size</button></a>
                             {{/with}}
 
-                            {{#unless hasVisualSubmisiion}}
+                            {{#unless hasVisualSubmission}}
                                 <p>No submissions</p>
                             {{/unless}}
                         </div>
@@ -170,7 +125,7 @@
                                 {{/if}}
                             {{/if}}
 
-                            {{#unless hasAudioSubmisiion}}
+                            {{#unless hasAudioSubmission}}
                                 <p>No submissions</p>
                             {{/unless}}
                         </div>
@@ -195,13 +150,66 @@
                                 {{{content}}}
                             {{/if}}
 
-                            {{#unless hasWrittenSubmisiion}}
+                            {{#unless hasWrittenSubmission}}
                                 <p>No submissions</p>
                             {{/unless}}
                         </div>
                     </div>
                 </div>
             {{/with}}
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b>All Match Submissions</b></h3>
+            </div>
+            <div class="panel-body">
+                <ul id="submission-type-tabs" class="nav nav-tabs nav-justified">
+                    <li role="presentation"><a data-toggle="tab" href="#submission-visual-tab"><i class="fa fa-picture-o"></i> Visual <p class="label label-info bold-text">{{visualCount}}</p></a></li>
+                    <li role="presentation"><a data-toggle="tab" href="#submission-audio-tab"><i class="fa fa-headphones"></i> Audio <p class="label label-info bold-text">{{audioCount}}</p></a></li>
+                    <li role="presentation"><a data-toggle="tab" href="#submission-written-tab"><i class="fa fa-pencil"></i> Written <p class="label label-info bold-text">{{writtenCount}}</p></a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="submission-visual-tab" class="tab-pane fade in">
+                        <div class="container-fluid voffset4">
+                            {{#each submissions}}
+                                {{#if isVisual}}
+                                    {{>submissionItem}}
+                                {{/if}}
+                            {{/each}}
+                            {{#unless hasVisualSubmission}}
+                                <p class="text-center">No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+
+                    <div id="submission-audio-tab" class="tab-pane fade in">
+                        <div class="container-fluid voffset4">
+                            {{#each submissions}}
+                                {{#if isAudio}}
+                                    {{>submissionItem}}
+                                {{/if}}
+                            {{/each}}
+                            {{#unless hasAudioSubmission}}
+                                <p class="text-center">No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+
+                    <div id="submission-written-tab" class="tab-pane fade in">
+                        <div class="container-fluid voffset4">
+                            {{#each submissions}}
+                                {{#if isWritten}}
+                                    {{>submissionItem}}
+                                {{/if}}
+                            {{/each}}
+                            {{#unless hasWrittenSubmission}}
+                                <p class="text-center">No submissions</p>
+                            {{/unless}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

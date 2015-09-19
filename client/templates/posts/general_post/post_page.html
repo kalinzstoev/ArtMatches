@@ -79,6 +79,7 @@
                 <p>Submitted: {{submittedParsed}}</p>
                 <p>Category: {{category}}</p>
                 <p>Tags: {{tags}}</p>
+                Likes: <p class="label label-success bold-text">{{likes}}</p>
             </div>
         </div>
 
@@ -86,7 +87,6 @@
             {{#unless ownPost}}
                 <button type="button" class="btn btn-primary btn-lg loffset15px" data-toggle="modal" data-target="#submit-artmatch"><i class="glyphicon glyphicon-text-background"></i> Submit Match</button>
             {{/unless}}
-
             <div class="panel panel-default voffset3">
                 <div class="panel-body">
                     <button type="button" class="btn btn-xs {{likedClass}}"><i class="fa fa-thumbs-o-up"> Like</i></button>

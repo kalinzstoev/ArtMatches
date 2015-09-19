@@ -6,6 +6,7 @@ Template.postsList.onCreated(function(){
 });
 
 Template.postsList.helpers({
+    //A helper which checks the current route of the app and selects the appropriate tab in the second navigation bar
     activeRouteClass: function(/* route names */) {
         var args = Array.prototype.slice.call(arguments, 0);
         args.pop();
@@ -64,14 +65,6 @@ Template.postsList.helpers({
             return true;
         }
     },
-
-    isSearching: function(){
-        if (Template.instance().searchInput.get() == ""){
-            return false;
-        }else{
-            return true;
-        }
-    }
 });
 
 Template.postsList.events({
@@ -105,6 +98,8 @@ Template.postsList.events({
 
 });
 
+//A function which takes the current state of the reactive var activeRoute, the artype select and the category and
+//then routes the application with an appropriate query
 var makeQuery = function(){
     var query = "";
 

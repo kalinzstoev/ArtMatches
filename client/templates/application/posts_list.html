@@ -117,6 +117,7 @@
     </nav>
     <!--Second navigation bar - End-->
 
+    <!--Posts display grid - start-->
     <div class="posts">
         <div class="container-fluid">
             <div class="row">
@@ -133,6 +134,7 @@
         <h1 class="text-center voffset5">No posts available</h1>
     {{/if }}
 
+    <!--Checks if there more posts to display-->
     {{#if nextPath}}
         <div class="text-center">
             <a class="btn btn-primary" href="{{nextPath}}">Load more...</a>
@@ -142,6 +144,9 @@
             {{> spinner}}
         {{/unless}}
     {{/if}}
+
+    <!--Posts grid display end -->
+
 </template>
 
 

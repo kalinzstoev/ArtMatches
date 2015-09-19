@@ -1,6 +1,5 @@
 Slug = {};
 
-// taken from http://themeteorchef.com/recipes/slugged-routes/
 Slug.slugify = function(value) {
     // Take our passed value and format it using a series of regular expressions.
     // The solution for this was derrived from a bit of experimentation and some

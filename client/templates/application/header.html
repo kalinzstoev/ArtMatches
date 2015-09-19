@@ -1,3 +1,6 @@
+<!--The main header/navigation template which is present in any part of the application-->
+
+<!--First part of the header-->
 <template name="header">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -31,6 +34,8 @@
                 {{/if}}
             </ul>
 
+
+            <!--Second part of the header which includes the sign in and the notifications dropdown-->
             <ul class="nav navbar-nav navbar-right" id="navigation">
                 {{#if currentUser}}
                     <li class="dropdown">

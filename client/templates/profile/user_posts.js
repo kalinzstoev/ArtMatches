@@ -31,7 +31,7 @@ Template.userPosts.helpers({
 
 Template.userPosts.onCreated(function () {
 
-    // 1. Initialization
+  //Initialization
 
     var instance = this;
 
@@ -41,7 +41,7 @@ Template.userPosts.onCreated(function () {
     instance.loaded = new ReactiveVar(0);
     instance.limit = new ReactiveVar(8);
 
-    // 2. Autorun
+    // Autorun
 
     // will re-run when the "limit" reactive variables changes
     instance.autorun(function () {
@@ -60,7 +60,7 @@ Template.userPosts.onCreated(function () {
         }
     });
 
-    // 3. Cursor
+    // Cursor
 
     instance.posts = function() {
         return Posts.find({}, {limit: instance.loaded.get()});

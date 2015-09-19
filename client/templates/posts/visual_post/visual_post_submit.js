@@ -65,8 +65,6 @@ Template.visualPostSubmit.events({
 
     "change .add_image": function(e, instance){
         var user = Meteor.user();
-        //TODO currently you can't upload the same file name twice
-        //TODO think about disabling the submit button and the audio button while uploading
 
         FS.Utility.eachFile(e, function(file)
         {

@@ -1,7 +1,4 @@
 Template.submitArtMatch.onCreated(function () {
-    //TODO adjust pagination for images to be based on number of images and not number of posts
-
-    // 1. Initialization
 
 
     var instance = this;
@@ -16,8 +13,6 @@ Template.submitArtMatch.onCreated(function () {
     instance.loaded = new ReactiveVar(0);
     instance.limit = new ReactiveVar(6);
     Session.set('postTypeTab', 'visual');
-
-    // 2. Autorun
 
     // will re-run when the "limit" reactive variables changes
     instance.autorun(function () {
@@ -38,8 +33,6 @@ Template.submitArtMatch.onCreated(function () {
             instance.loaded.set(limit);
         }
     });
-
-    // 3. Cursor
 
     instance.posts = function() {
         return Posts.find({userId: userId, postType: Session.get('postTypeTab') }, {limit: instance.loaded.get()});

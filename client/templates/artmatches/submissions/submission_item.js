@@ -1,4 +1,6 @@
 Template.submissionItem.helpers({
+
+    //Makes sure the vote button is disabled if the user has voted or can't vote and displays an upvotable class if he can
     voteClass: function() {
         var userId = Meteor.userId();
         if (userId && !_.include(this.voters, userId)) {
@@ -15,6 +17,7 @@ Template.submissionItem.events({
         Session.set("submissionContentId", this._id);
     },
 
+    //A function which calls the vote server method when the like button has been clicked
     'click .upvoteable': function (event) {
         event.preventDefault();
         Meteor.call('vote', this._id);

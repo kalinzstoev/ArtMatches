@@ -1,3 +1,4 @@
+//A global helper which checks the type of a post
 Template.registerHelper('isVisual', function () {
     return this.postType == 'visual' || this.type == "visual";
 });

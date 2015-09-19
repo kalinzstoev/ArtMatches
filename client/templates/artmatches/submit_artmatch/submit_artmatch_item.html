@@ -2,6 +2,12 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title text-left">
+                {{#if isAudio}}
+                    <i class="fa fa-headphones"></i>
+                {{/if}}
+                {{#if isWritten}}
+                    <i class="fa fa-pencil"></i>
+                {{/if}}
                     {{title}}
                 <div class="pull-right loffset1">
                     <input type="radio" autocomplete="off" name="radioOptions" id="radio1" value="{{_id}}">

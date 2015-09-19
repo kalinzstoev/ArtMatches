@@ -21,15 +21,16 @@ Template.artmatchItem.helpers({
         return result;
     },
 
+    //Checks if the title is too long and truncates it so it doesn't push to other columns
     truncatedTitle: function(){
 
-        if (this.title.length>=30){
-            var truncatedTitle = this.title.substring(0,30);
+        if (this.title.length>=26){
+            var truncatedTitle = this.title.substring(0,26);
             var lastIndexOfSpace = truncatedTitle.lastIndexOf(" ");
             if (lastIndexOfSpace>0){
                 truncatedTitle = truncatedTitle.substring(0, lastIndexOfSpace) + "...";
             }else{
-                truncatedTitle = truncatedTitle.substring(0, 27) + "...";
+                truncatedTitle = truncatedTitle.substring(0, 26) + "...";
             }
             return truncatedTitle;
         }else{

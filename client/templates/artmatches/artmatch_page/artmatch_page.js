@@ -59,15 +59,15 @@ Template.artmatchPage.helpers({
         }
     },
 
-    hasVisualSubmisiion: function(){
+    hasVisualSubmission: function(){
         return Session.get("hasVisualSubmission");
     },
 
-    hasAudioSubmisiion: function(){
+    hasAudioSubmission: function(){
         return Session.get("hasAudioSubmission");
     },
 
-    hasWrittenSubmisiion: function(){
+    hasWrittenSubmission: function(){
         return Session.get("hasWrittenSubmission");
     },
 
@@ -101,6 +101,8 @@ Template.artmatchPage.onRendered(function(){
     var audioCount = Session.get("audioCount");
     var writtenCount = Session.get("writtenCount");
 
+    //Makes sure that at least one tab is selected when the template is rendered so the user could see
+    //the available submissions
     if (visualCount>0){
         $('#submission-type-tabs a[href="#submission-visual-tab"]').tab('show');
     }else if (audioCount>0){

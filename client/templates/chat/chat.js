@@ -2,6 +2,7 @@ Template.chat.events({
     'click .sendMsg': function(e) {
         sendMessage();
     },
+    //Captures the event if the user presses enter instead of the button
     'keyup #msg': function(e) {
         if (e.type == "keyup" && e.which == 13) {
             sendMessage();
@@ -18,9 +19,10 @@ Template.chat.events({
     },
 });
 
+
+//A function which grabs the string from the msg input element and inserts it in the Messages collection
 sendMessage = function() {
     var message = document.getElementById("msg");
-    //make a insert message method
     Messages.insert({user: Meteor.user().username, msg: message.value, ts: new Date(), room: Session.get("roomName")});
     $('#msg').val("");
     el.value = "";
