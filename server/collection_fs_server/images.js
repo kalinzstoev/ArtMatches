@@ -9,8 +9,8 @@ var imageStore = new FS.Store.S3("images", {
 
 var thumbsStore = new FS.Store.S3("thumbs", {
     /* REQUIRED */
-    accessKeyId: "AKIAILLXBNDCK75Q47DQ",
-    secretAccessKey: "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",
+    accessKeyId: "",
+    secretAccessKey: "",
     bucket: "artmatches.thumbs",
     region:"eu-west-1",
 
